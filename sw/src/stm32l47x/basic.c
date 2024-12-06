@@ -66,3 +66,16 @@ void exti_enable(uint8_t line_number, EXTI_Mode trigger_mode) {
     uint8_t interrupt_num = exti_get_interrupt_num(ln);
     enable_interrupt(interrupt_num);
 }
+
+////////////////////////////////////////////////////////////
+//  Systick
+////////////////////////////////////////////////////////////
+
+void systick_init(uint32_t ticks) {
+    Systick_Regs *systick = (Systick_Regs *)SYSTICK_REGS_START_ADDRESS;
+    if ((ticks - 1) > 0xffffff) return;
+    systick->RVR = ticks - 1;
+    systick->CVR = 0;
+    systick->CSR |= 7UL;
+    RCC->APB2ENR |= BIT(0);
+}

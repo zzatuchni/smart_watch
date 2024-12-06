@@ -1,6 +1,6 @@
 #include "stm32l47x/basic.h"
 #include "stm32l47x/gpio.h"
-#include "stm32l47x/interrupts.h"
+#include "interrupts.h"
 
 ////////////////////////////////////////////////////////////
 //  Startup code 
@@ -15,13 +15,22 @@ void led_init(STM32_Pin led_pin) {
 
 int main(void) {
 
+    systick_init(DEFAULT_SYSCLK_FREQ / 1000);
+
     STM32_Pin led_pin = {LED_PIN_BANK, LED_PIN_NUMBER};
     led_init(led_pin);
 
+    STM32_Pin uart_tx_pin = {'A', 2};
+    STM32_Pin uart_rx_pin = {'A', 3};
+
+    uart_init(USART2, uart_tx_pin, uart_rx_pin);
+
     for (;;) {
         gpio_write(true, led_pin);
+        uart_write_buf(USART2, "on\n", 3);
         spin(500000);
         gpio_write(false, led_pin);
+        uart_write_buf(USART2, "off\n", 4);
         spin(500000);
     }
 
@@ -42,10 +51,10 @@ extern void _estack(void);  // Defined in link.ld
 
 // 16 standard and 91 STM32-specific handlers
 __attribute__((section(".vectors"))) void (*const volatile tab[16 + 99])(void) = {
-    _estack, _reset, 0, _on_hard_fault, _on_mem_fault, _on_bus_fault, _on_usage_fault, 0, 0, 0, 0, 0, 0, 0, 0, 0x0,  //ARM core interrupts
+    _estack, _reset, 0, _on_hard_fault, _on_mem_fault, _on_bus_fault, _on_usage_fault, 0, 0, 0, 0, 0, 0, 0, 0, _on_systick,  //ARM core interrupts
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, // 0 - 15
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, // 16 - 31
-    0, 0, 0, 0, 0, 0, 0x0, 0, 0x0, 0, 0, 0, 0, 0, 0, 0, // 32 - 47
+    0, 0, 0, 0, 0, 0, _on_uart2_interrupt, 0, 0x0, 0, 0, 0, 0, 0, 0, 0, // 32 - 47
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, // 48 - 63
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, // 64 - 79
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, // 80 - 96

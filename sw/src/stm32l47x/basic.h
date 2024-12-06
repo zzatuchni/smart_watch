@@ -111,4 +111,17 @@ typedef struct {
 
 // Later: typedef struct ClockSettings, sysclk_config(ClockSettings *settings)
 
+////////////////////////////////////////////////////////////
+//  Systick
+////////////////////////////////////////////////////////////
+
+#define SYSTICK_REGS_START_ADDRESS 0xE000E010
+#define SYSTICK_APB2ENR_BIT 0
+
+typedef struct {
+    volatile uint32_t CSR, RVR, CVR, CALIB;
+} Systick_Regs;
+
+void systick_init(uint32_t ticks);
+
 #endif

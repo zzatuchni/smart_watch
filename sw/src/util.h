@@ -9,6 +9,8 @@
 #define BIT(x) (1UL << (x))
 #define BYTE_SWAP(x) ((((x) & 0xFF00) >> 8) + (((x) & 0x00FF) << 8))
 
+typedef int Result;
+
  __attribute__((optimize("O0"))) void spin(uint32_t count);
 
 void int_to_str(uint32_t x, char *buf, uint8_t size, uint8_t radix);
