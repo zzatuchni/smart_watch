@@ -1,0 +1,8 @@
+stm32l47x cmsis (not copied directly):
+https://github.com/STMicroelectronics/cmsis-device-l4/blob/a2530753e86dd326a75467d28feb92e2ba7d0df2/Include/stm32l476xx.h
+
+project inspiration:
+https://github.com/jakkra/ZSWatch/tree/main
+
+gc9a01 initialization sequence and command names:
+https://github.com/adafruit/Adafruit_GC9A01A/blob/main/Adafruit_GC9A01A.cpp

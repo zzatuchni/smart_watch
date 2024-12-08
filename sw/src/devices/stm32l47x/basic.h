@@ -1,7 +1,7 @@
 #ifndef BASIC_H
 #define BASIC_H
 
-#include "../util.h"
+#include "../../util.h"
 
 ////////////////////////////////////////////////////////////
 //  Constants

@@ -1,6 +1,8 @@
-#include "stm32l47x/basic.h"
-#include "stm32l47x/gpio.h"
 #include "interrupts.h"
+#include "devices/stm32l47x/basic.h"
+#include "devices/stm32l47x/gpio.h"
+#include "devices/stm32l47x/uart.h"
+#include "devices/gc9a01/gc9a01.h"
 
 ////////////////////////////////////////////////////////////
 //  Startup code 
@@ -15,23 +17,34 @@ void led_init(STM32_Pin led_pin) {
 
 int main(void) {
 
-    systick_init(DEFAULT_SYSCLK_FREQ / 1000);
+    //systick_init(DEFAULT_SYSCLK_FREQ / 1000);
 
-    STM32_Pin led_pin = {LED_PIN_BANK, LED_PIN_NUMBER};
-    led_init(led_pin);
+    //STM32_Pin led_pin = {LED_PIN_BANK, LED_PIN_NUMBER};
+    //led_init(led_pin);
 
-    STM32_Pin uart_tx_pin = {'A', 2};
-    STM32_Pin uart_rx_pin = {'A', 3};
+    const UART_Config uart_cfg = {
+        USART2,     // uart
+        {'A', 2},   // tx_pin
+        {'A', 3}    // rx_pin
+    };
 
-    uart_init(USART2, uart_tx_pin, uart_rx_pin);
+    Result res = uart_init(&uart_cfg);
+    if (res) { for (;;) {} };
+
+    res = gc9a01_init();
+    if (res) { for (;;) { 
+        uart_write_value(USART2, res);
+        uart_write_buf(USART2, " bad lcd\r\n", 10); 
+        spin(50000);
+    } };
+
+    uint16_t color = GC9A01A_BLUE;
+
+    gc9a01_set_frame(0, 0, 240, 240);
+    gc9a01_write_cmd_code(GC9A01A_RAMWR);
 
     for (;;) {
-        gpio_write(true, led_pin);
-        uart_write_buf(USART2, "on\n", 3);
-        spin(500000);
-        gpio_write(false, led_pin);
-        uart_write_buf(USART2, "off\n", 4);
-        spin(500000);
+        gc9a01_write_colors(&color, 1);
     }
 
     return 0;

@@ -49,9 +49,20 @@ typedef struct {
 
 #define LPUART1 ((LPUART_Regs *)LPUART1_REGS_START_ADDRESS)
 
-Result uart_init(UART_Regs *uart, STM32_Pin tx_pin, STM32_Pin rx_pin);
+typedef struct {
+    UART_Regs *uart;
+    STM32_Pin tx_pin;
+    STM32_Pin rx_pin;
+} UART_Config;
 
-Result lpuart_init(STM32_Pin tx_pin, STM32_Pin rx_pin);
+typedef struct {
+    STM32_Pin tx_pin;
+    STM32_Pin rx_pin;
+} LPUART_Config;
+
+Result uart_init(const UART_Config *config);
+
+Result lpuart_init(const LPUART_Config *config);
 
 uint8_t uart_read_byte(UART_Regs *uart);
 
@@ -61,6 +72,6 @@ void uart_write_byte(UART_Regs *uart, uint8_t byte);
 
 void uart_write_buf(UART_Regs *uart, char *buf, size_t len);
 
-void write_value(UART_Regs *uart, uint32_t val);
+void uart_write_value(UART_Regs *uart, uint32_t val);
 
 #endif
