@@ -2,6 +2,7 @@
 #include "devices/stm32l47x/basic.h"
 #include "devices/stm32l47x/gpio.h"
 #include "devices/stm32l47x/uart.h"
+#include "devices/stm32l47x/rtc.h"
 #include "devices/gc9a01/gc9a01.h"
 
 ////////////////////////////////////////////////////////////
@@ -15,6 +16,10 @@ void led_init(STM32_Pin led_pin) {
     gpio_set_mode(GPIO_MODE_OUTPUT, led_pin);
 }
 
+char buf[8];
+char date_buf[64];
+
+
 int main(void) {
 
     //systick_init(DEFAULT_SYSCLK_FREQ / 1000);
@@ -23,28 +28,74 @@ int main(void) {
     //led_init(led_pin);
 
     const UART_Config uart_cfg = {
-        USART2,     // uart
+        USART2,     // uarts
         {'A', 2},   // tx_pin
         {'A', 3}    // rx_pin
     };
 
     Result res = uart_init(&uart_cfg);
     if (res) { for (;;) {} };
+    uart_write_buf(USART2, "\33c", 2);
 
     res = gc9a01_init();
-    if (res) { for (;;) { 
-        uart_write_value(USART2, res);
-        uart_write_buf(USART2, " bad lcd\r\n", 10); 
-        spin(50000);
-    } };
+    if (res) { for (;;) {} };
 
     uint16_t color = GC9A01A_BLUE;
 
     gc9a01_set_frame(0, 0, 240, 240);
     gc9a01_write_cmd_code(GC9A01A_RAMWR);
 
+    rtc_init();
+
+    uint32_t num_pixels = (GC9A01A_TFTWIDTH * GC9A01A_TFTHEIGHT);
+    Time time;    
+
     for (;;) {
-        gc9a01_write_colors(&color, 1);
+        for (uint32_t i = 0; i < num_pixels; i++)
+            gc9a01_write_colors(&color, 1);
+
+        rtc_get_time(&time);
+        
+        int_to_str(time.weekday, buf, 8, 10);
+        uart_write_buf(USART2, "WD ", 3);
+        uart_write_buf(USART2, buf, 8);
+
+        int_to_str(time.year, buf, 8, 10);
+        uart_write_buf(USART2, " Y ", 3);
+        uart_write_buf(USART2, buf, 8);
+
+        int_to_str(time.month, buf, 8, 10);
+        uart_write_buf(USART2, " M ", 3);
+        uart_write_buf(USART2, buf, 8);
+
+        int_to_str(time.day, buf, 8, 10);
+        uart_write_buf(USART2, " D ", 3);
+        uart_write_buf(USART2, buf, 8);
+
+        int_to_str(time.hour, buf, 8, 10);
+        uart_write_buf(USART2, " h ", 3);
+        uart_write_buf(USART2, buf, 8);
+
+        int_to_str(time.minute, buf, 8, 10);
+        uart_write_buf(USART2, " m ", 3);
+        uart_write_buf(USART2, buf, 8);
+
+        int_to_str(time.second, buf, 8, 10);
+        uart_write_buf(USART2, " s ", 3);
+        uart_write_buf(USART2, buf, 8);
+
+        int_to_str(time.subsecond, buf, 8, 10);
+        uart_write_buf(USART2, " ss ", 4);
+        uart_write_buf(USART2, buf, 8);
+
+        uart_write_buf(USART2, "\r\n", 2);
+
+        size_t sz = write_date_str(&time, date_buf);
+        uart_write_buf(USART2, date_buf, sz);
+
+        uart_write_buf(USART2, "\r\n", 2);
+
+        spin(1000000);
     }
 
     return 0;

@@ -15,7 +15,7 @@
 ////////////////////////////////////////////////////////////
 
 typedef struct {
-    char bank;
+    uint8_t bank;
     uint8_t number;
 } STM32_Pin;
 
@@ -123,5 +123,18 @@ typedef struct {
 } Systick_Regs;
 
 void systick_init(uint32_t ticks);
+
+////////////////////////////////////////////////////////////
+//  PWR
+////////////////////////////////////////////////////////////
+
+#define PWR_REGS_START_ADDRESS 0x40007000
+#define PWR_APB1ENR1_BIT 28
+typedef struct {
+    volatile uint32_t CR[4], SR[2], SCR, RESERVED;
+    volatile uint64_t PUCRA_PDCRA[9];
+} PWR_Regs;
+
+#define PWR ((PWR_Regs *)(PWR_REGS_START_ADDRESS))
 
 #endif

@@ -22,8 +22,10 @@ void gc9a01_write_buf(char *buf, size_t len);
 
 void gc9a01_write_colors(uint16_t *colors, size_t num_colors);
 
-void gc9a01_write_cmd(uint8_t cmd, char *args, size_t num_args);
+void gc9a01_write_cmd(uint8_t cmd, uint8_t *args, size_t num_args);
 
 Result gc9a01_init();
+
+Result gc9a01_set_frame(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1);
 
 #endif

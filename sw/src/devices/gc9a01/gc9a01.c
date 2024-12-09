@@ -87,7 +87,7 @@ void gc9a01_write_buf(char *buf, size_t len) {
     spi_write_buf(gc9a01_spi_config.spi, buf, len);
 }
 
-void gc9a01_write_cmd(uint8_t cmd, char *args, size_t num_args) {
+void gc9a01_write_cmd(uint8_t cmd, uint8_t *args, size_t num_args) {
     gc9a01_write_cmd_code(cmd);
     for (uint8_t i = 0; i < num_args; i++) gc9a01_write_byte(*args++);
 }
