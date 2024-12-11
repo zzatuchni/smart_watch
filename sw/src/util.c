@@ -5,7 +5,7 @@
 }
 
 void int_to_str(uint32_t x, char *buf, size_t size, uint8_t radix) {
-    for (uint8_t i = size; i > 0; i--) {
+    for (size_t i = size; i > 0; i--) {
         uint32_t rem = x % radix;
         x /= radix;
         if (rem < 10) {

@@ -130,6 +130,7 @@ void systick_init(uint32_t ticks);
 
 #define PWR_REGS_START_ADDRESS 0x40007000
 #define PWR_APB1ENR1_BIT 28
+
 typedef struct {
     volatile uint32_t CR[4], SR[2], SCR, RESERVED;
     volatile uint64_t PUCRA_PDCRA[9];

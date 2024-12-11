@@ -90,11 +90,6 @@ int main(void) {
 
         uart_write_buf(USART2, "\r\n", 2);
 
-        size_t sz = write_date_str(&time, date_buf);
-        uart_write_buf(USART2, date_buf, sz);
-
-        uart_write_buf(USART2, "\r\n", 2);
-
         spin(1000000);
     }
 

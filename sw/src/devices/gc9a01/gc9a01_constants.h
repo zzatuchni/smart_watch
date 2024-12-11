@@ -52,25 +52,26 @@
 #define GC9A01A_INREGEN1 0xFE  ///< Inter register enable 1
 
 // Color definitions
+// BYTES ARE SWAPPED BECAUSE THE LCD PROCESSES COLORS LSB FIRST, BUT NOT COMMANDS
 #define GC9A01A_BLACK 0x0000       ///<   0,   0,   0
-#define GC9A01A_NAVY 0x000F        ///<   0,   0, 123
-#define GC9A01A_DARKGREEN 0x03E0   ///<   0, 125,   0
-#define GC9A01A_DARKCYAN 0x03EF    ///<   0, 125, 123
-#define GC9A01A_MAROON 0x7800      ///< 123,   0,   0
-#define GC9A01A_PURPLE 0x780F      ///< 123,   0, 123
-#define GC9A01A_OLIVE 0x7BE0       ///< 123, 125,   0
-#define GC9A01A_LIGHTGREY 0xC618   ///< 198, 195, 198
-#define GC9A01A_DARKGREY 0x7BEF    ///< 123, 125, 123
-#define GC9A01A_BLUE 0x001F        ///<   0,   0, 255
-#define GC9A01A_GREEN 0x07E0       ///<   0, 255,   0
-#define GC9A01A_CYAN 0x07FF        ///<   0, 255, 255
-#define GC9A01A_RED 0xF800         ///< 255,   0,   0
-#define GC9A01A_MAGENTA 0xF81F     ///< 255,   0, 255
-#define GC9A01A_YELLOW 0xFFE0      ///< 255, 255,   0
+#define GC9A01A_NAVY 0x0F0F        ///<   0,   0, 123
+#define GC9A01A_DARKGREEN 0xE003   ///<   0, 125,   0
+#define GC9A01A_DARKCYAN 0xEF03    ///<   0, 125, 123
+#define GC9A01A_MAROON 0x0078      ///< 123,   0,   0
+#define GC9A01A_PURPLE 0x0F78      ///< 123,   0, 123
+#define GC9A01A_OLIVE 0xE07B       ///< 123, 125,   0
+#define GC9A01A_LIGHTGREY 0x18C6   ///< 198, 195, 198
+#define GC9A01A_DARKGREY 0xEF7B    ///< 123, 125, 123
+#define GC9A01A_BLUE 0x1F00        ///<   0,   0, 255
+#define GC9A01A_GREEN 0xE007       ///<   0, 255,   0
+#define GC9A01A_CYAN 0xFF07        ///<   0, 255, 255
+#define GC9A01A_RED 0x00F8         ///< 255,   0,   0
+#define GC9A01A_MAGENTA 0x1FF8     ///< 255,   0, 255
+#define GC9A01A_YELLOW 0xE0FF      ///< 255, 255,   0
 #define GC9A01A_WHITE 0xFFFF       ///< 255, 255, 255
-#define GC9A01A_ORANGE 0xFD20      ///< 255, 165,   0
-#define GC9A01A_GREENYELLOW 0xAFE5 ///< 173, 255,  41
-#define GC9A01A_PINK 0xFC18        ///< 255, 130, 198
+#define GC9A01A_ORANGE 0x20FD      ///< 255, 165,   0
+#define GC9A01A_GREENYELLOW 0xE5AF ///< 173, 255,  41
+#define GC9A01A_PINK 0x18FC        ///< 255, 130, 198
 
 #define GC9A01A_MADCTL_MY 0x80  ///< Bottom to top
 #define GC9A01A_MADCTL_MX 0x40  ///< Right to left

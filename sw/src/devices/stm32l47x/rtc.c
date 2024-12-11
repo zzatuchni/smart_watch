@@ -10,50 +10,48 @@ Result rtc_init() {
     RCC->APB1ENR1 |= BIT(PWR_APB1ENR1_BIT);
     RCC->APB1ENR1 |= BIT(RTC_APB1ENR1_BIT);
 
-    PWR->CR[0] |= BIT(8); //DBP, Disable backup domain write protection
-
     // Configure LSE / RTC
-    RCC->BDCR |= BIT(15); //RTCEN, RTC enable
-
     RCC->BDCR |= BIT(8); //RTCSEL = 0x1 = LSE
 
     RCC->BDCR |= BIT(0); //LSEON, LSE oscillator enable
 
     while (!(RCC->BDCR & BIT(1))) {}; //LSERDY, LSE ready
 
-    // disable RTC write protection
-    //RTC->WPR |= 0xCA;
-    //RTC->WPR |= 0x53;
+    RTC_DISABLE_WRITE_PROTECTION()
 
-    //RTC->ISR |= BIT(7); // INIT, enable initialization mode
-    //uart_write_value(USART2, RTC->ISR);
-    //uart_write_byte(USART2, '1');
-    //while (!(RTC->ISR & BIT(6))) {}; // INITF, initializatio mode entered
-    //uart_write_byte(USART2, '2');
+    RTC->ISR |= BIT(7); // INIT, enable initialization mode
+    while (!(RTC->ISR & BIT(6))) {}; // INITF, initialization mode entered
 
-    //RTC->TR = 0x0;
-    //RTC->DR = 0x0;
+    RTC->TR = 0x0;
+    RTC->DR = 0x0;
+    
+    RTC->ISR &= ~BIT(7); // INIT, disable initialization mode
 
-    //RTC->ISR &= ~BIT(7); // INIT, enable initializatio mode
-    //spin(5000);
+    RTC_ENABLE_WRITE_PROTECTION()
 
     RCC->BDCR |= BIT(15); //RTCEN, RTC clock enable
+    
+    RTC->ISR &= ~BIT(5);
+    while (!(RTC->ISR & BIT(5))) {}; // RSF, synchronization
 
     return RES_OK;
 }
 
 Result rtc_get_time(Time *time) {
-    time->year =    (uint8_t)(RTC_DR_YT * 10 + RTC_DR_YU);
-    time->month =   (uint8_t)(RTC_DR_MT * 10 + RTC_DR_MU);
-    time->day =     (uint8_t)(RTC_DR_DT * 10 + RTC_DR_DU);
-
-    time->weekday = (uint8_t)RTC_DR_WD;
+    RTC->ISR &= ~BIT(5);
+    while (!(RTC->ISR & BIT(5))) {}; // RSF, synchronization
 
     time->hour =    (uint8_t)(RTC_TR_HT * 10 + RTC_TR_HU);
     time->minute =  (uint8_t)(RTC_TR_MT * 10 + RTC_TR_MU);
     time->second =  (uint8_t)(RTC_TR_ST * 10 + RTC_TR_SU);
 
     time->subsecond = (uint16_t)RTC->SSR;
+
+    time->year =    (uint8_t)(RTC_DR_YT * 10 + RTC_DR_YU);
+    time->month =   (uint8_t)(RTC_DR_MT * 10 + RTC_DR_MU);
+    time->day =     (uint8_t)(RTC_DR_DT * 10 + RTC_DR_DU);
+
+    time->weekday = (uint8_t)RTC_DR_WD;
 
     return RES_OK;
 }
@@ -67,20 +65,5 @@ size_t write_weekday_str(uint8_t wkday, char *buf) {
 size_t write_month_str(uint8_t month, char *buf) {
     size_t sz = (size_t)month_szs[month];
     str_copy(month_strs[month], buf, sz);
-    return sz;
-}
-
-size_t write_date_str(Time *time, char *buf) {
-    size_t sz = 0;
-    sz += write_weekday_str(time->weekday, buf);
-    
-    int_to_str(time->day, buf+sz, 2, 10);
-    sz += 2;
-
-    sz += write_month_str(time->month, buf+sz);
-
-    int_to_str(time->year, buf+sz, 4, 10);
-    sz += 4;
-
     return sz;
 }

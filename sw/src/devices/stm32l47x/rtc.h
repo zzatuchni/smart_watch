@@ -9,7 +9,7 @@
 #define RTC_APB1ENR1_BIT 10
 
 typedef struct {
-    volatile uint32_t TR, DR, CR, ISR, PRER, WUTR, ALRMAR, ALRMBR, WPR, SSR, SHIFTR,
+    volatile uint32_t TR, DR, CR, ISR, PRER, WUTR, RESERVED, ALRMAR, ALRMBR, WPR, SSR, SHIFTR,
         TSTR, TSDR, TSSSR, CALR, TAMPCR, ALRMASSR, ALRMBSSR, OR, BKPxR[19];
 } RTC_Regs;
 
@@ -29,6 +29,10 @@ typedef struct {
 #define RTC_DR_MU ((RTC->DR & (BIT(8) | BIT(9) | BIT(10) | BIT(11))) >> 8)
 #define RTC_DR_DT ((RTC->DR & (BIT(4) | BIT(5))) >> 4)
 #define RTC_DR_DU ((RTC->DR & (BIT(0) | BIT(1) | BIT(2) | BIT(3))) >> 0)
+
+// DPB bit in PWR, write code in WPR
+#define RTC_DISABLE_WRITE_PROTECTION() { PWR->CR[0] |= BIT(8); RTC->WPR = 0xCA; RTC->WPR = 0x53; }
+#define RTC_ENABLE_WRITE_PROTECTION() { PWR->CR[0] &= ~BIT(8); RTC->WPR = 0xFF; }
 
 typedef struct {
     uint8_t year;
@@ -53,7 +57,5 @@ Result rtc_get_time(Time *time);
 size_t write_weekday_str(uint8_t wkday, char *buf);
 
 size_t write_month_str(uint8_t month, char *buf);
-
-size_t write_date_str(Time *time, char *buf);
 
 #endif

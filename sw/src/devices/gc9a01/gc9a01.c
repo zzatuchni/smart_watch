@@ -92,12 +92,12 @@ void gc9a01_write_cmd(uint8_t cmd, uint8_t *args, size_t num_args) {
     for (uint8_t i = 0; i < num_args; i++) gc9a01_write_byte(*args++);
 }
 
-void gc9a01_write_color(uint16_t color) {
-    spi_write_word(gc9a01_spi_config.spi, BYTE_SWAP(color));
+void gc9a01_write_color(GC9A01_Color color) {
+    spi_write_word(gc9a01_spi_config.spi, color);
 }
 
-void gc9a01_write_colors(uint16_t *colors, size_t num_colors) {
-    while (num_colors-- > 0) { spi_write_word(gc9a01_spi_config.spi, BYTE_SWAP(*colors)); colors += 2; };
+void gc9a01_write_colors(GC9A01_Color *colors, size_t num_colors) {
+    while (num_colors-- > 0) { spi_write_word(gc9a01_spi_config.spi,*colors); colors += 2; };
 }
 
 Result gc9a01_init() {
