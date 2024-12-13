@@ -17,9 +17,11 @@ Result rtc_init() {
 
     while (!(RCC->BDCR & BIT(1))) {}; //LSERDY, LSE ready
 
-    RTC_DISABLE_WRITE_PROTECTION()
+    /*
+    RTC_DISABLE_WRITE_PROTECTION();
 
     RTC->ISR |= BIT(7); // INIT, enable initialization mode
+
     while (!(RTC->ISR & BIT(6))) {}; // INITF, initialization mode entered
 
     RTC->TR = 0x0;
@@ -27,7 +29,8 @@ Result rtc_init() {
     
     RTC->ISR &= ~BIT(7); // INIT, disable initialization mode
 
-    RTC_ENABLE_WRITE_PROTECTION()
+    RTC_ENABLE_WRITE_PROTECTION();
+    */
 
     RCC->BDCR |= BIT(15); //RTCEN, RTC clock enable
     
@@ -52,6 +55,32 @@ Result rtc_get_time(Time *time) {
     time->day =     (uint8_t)(RTC_DR_DT * 10 + RTC_DR_DU);
 
     time->weekday = (uint8_t)RTC_DR_WD;
+
+    return RES_OK;
+}
+
+Result rtc_set_time(Time *time) {
+    RTC_DISABLE_WRITE_PROTECTION();
+
+    RTC->ISR |= BIT(7); // INIT, enable initialization mode
+
+    while (!(RTC->ISR & BIT(6))) {}; // INITF, initialization mode entered
+
+    RTC_SET_TR_H(time->hour);
+    RTC_SET_TR_M(time->minute);
+    RTC_SET_TR_S(time->second);
+
+    RTC_SET_DR_Y(time->year);
+    RTC_SET_DR_WD(time->weekday);
+    RTC_SET_DR_M(time->month);
+    RTC_SET_DR_D(time->day);
+    
+    RTC->ISR &= ~BIT(7); // INIT, disable initialization mode
+
+    RTC_ENABLE_WRITE_PROTECTION();
+
+    RTC->ISR &= ~BIT(5);
+    while (!(RTC->ISR & BIT(5))) {}; // RSF, synchronization
 
     return RES_OK;
 }

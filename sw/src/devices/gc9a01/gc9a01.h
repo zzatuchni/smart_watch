@@ -14,6 +14,8 @@ extern const uint8_t gc9a01_init_cmds[];
 
 typedef uint16_t GC9A01_Color;
 
+typedef struct { uint8_t x0; uint8_t y0; uint8_t x1; uint8_t y1; } GC9A01_Frame;
+
 void gc9a01_write_cmd_code(uint8_t cmd);
 
 void gc9a01_write_byte(uint8_t byte);
@@ -28,6 +30,11 @@ void gc9a01_write_cmd(uint8_t cmd, uint8_t *args, size_t num_args);
 
 Result gc9a01_init();
 
-Result gc9a01_set_frame(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1);
+Result gc9a01_set_frame(GC9A01_Frame *frame);
+
+Result gc9a01_draw_colors(GC9A01_Color *colors, size_t num_colors, GC9A01_Frame *frame, uint8_t scale);
+
+Result gc9a01_draw_colors_from_bitmask(uint8_t *mask, size_t len_bytes, GC9A01_Color fg_color, GC9A01_Color bg_color, GC9A01_Frame *frame, uint8_t scale);
+
 
 #endif

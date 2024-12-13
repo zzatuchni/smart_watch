@@ -11,7 +11,7 @@
 
 #define GENERIC_TIMEOUT_NUM 2000000
 typedef enum {
-    RES_OK, RES_TIMEOUT, RES_BAD_PARAM, RES_NOT_SUPPORTED
+    RES_OK, RES_TIMEOUT, RES_BAD_PARAM, RES_NOT_SUPPORTED, RES_OUT_OF_BOUNDS
 } Result;
 
  __attribute__((optimize("O0"))) void spin(uint32_t count);

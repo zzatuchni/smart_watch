@@ -93,11 +93,11 @@ void gc9a01_write_cmd(uint8_t cmd, uint8_t *args, size_t num_args) {
 }
 
 void gc9a01_write_color(GC9A01_Color color) {
-    spi_write_word(gc9a01_spi_config.spi, color);
+    spi_write_word(gc9a01_spi_config.spi, (uint16_t)color);
 }
 
 void gc9a01_write_colors(GC9A01_Color *colors, size_t num_colors) {
-    while (num_colors-- > 0) { spi_write_word(gc9a01_spi_config.spi,*colors); colors += 2; };
+    while (num_colors-- > 0) { spi_write_word(gc9a01_spi_config.spi,(uint16_t)*colors); colors += 2; };
 }
 
 Result gc9a01_init() {
@@ -113,9 +113,11 @@ Result gc9a01_init() {
     uint8_t *cmds_ptr = (uint8_t *)gc9a01_init_cmds;
     while (*cmds_ptr) {
         cmd = *cmds_ptr++;
+
         // send command op code
         gc9a01_write_cmd_code(cmd);
         cmd_len = *cmds_ptr++;
+
         // send command arguments
         for (uint8_t i = 0; i < cmd_len; i++) {
             arg = *cmds_ptr++;
@@ -129,21 +131,97 @@ Result gc9a01_init() {
     return RES_OK;
 }
 
-Result gc9a01_set_frame(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1)
+Result gc9a01_set_frame(GC9A01_Frame *frame)
 {
     uint8_t data[4];
 
-    data[0] = (x0 >> 8) & 0xFF;
-    data[1] = y0 & 0xFF;
-    data[2] = (x1 >> 8) & 0xFF;
-    data[3] = y1 & 0xFF;
+    data[0] = (frame->x0 >> 8) & 0xFF;
+    data[1] = frame->y0 & 0xFF;
+    data[2] = (frame->x1 >> 8) & 0xFF;
+    data[3] = frame->y1 & 0xFF;
     gc9a01_write_cmd(GC9A01A_CASET, data, sizeof(data));
 
-    data[0] = (x0 >> 8) & 0xFF;
-    data[1] = y0 & 0xFF;
-    data[2] = (x1 >> 8) & 0xFF;
-    data[3] = y1 & 0xFF;
+    data[0] = (frame->x0 >> 8) & 0xFF;
+    data[1] = frame->y0 & 0xFF;
+    data[2] = (frame->x1 >> 8) & 0xFF;
+    data[3] = frame->y1 & 0xFF;
     gc9a01_write_cmd(GC9A01A_RASET, data, sizeof(data));
 
     return RES_OK;
 }
+
+Result gc9a01_draw_colors(GC9A01_Color *colors, size_t num_colors, GC9A01_Frame *frame, uint8_t scale) {
+    gc9a01_set_frame(frame);
+    gc9a01_write_cmd_code(GC9A01A_RAMWR);
+
+    if (scale == 0) return RES_BAD_PARAM;
+    else if (scale == 1) {
+        gc9a01_write_colors(colors, num_colors);
+    }
+    else {
+        uint8_t pixels_x = (frame->x1 - frame->x0);
+        uint8_t pixels_y = (frame->y1 - frame->y0);
+        uint8_t cols = pixels_x / scale;
+        if (pixels_x % scale) cols++;
+        uint8_t rows = pixels_y / scale;
+        if (pixels_y % scale) rows++;
+
+        if (num_colors < (rows * cols)) return RES_OUT_OF_BOUNDS;
+
+        for (uint8_t r = 0; r < rows; r++) {
+            for (uint8_t i = 0; i < scale; i++) {
+                for (uint8_t c = 0; c < cols; c++) {
+                    for (uint8_t j = 0; j < scale; j++) {
+                        gc9a01_write_color(colors[r * rows + c]);
+                    }
+                } 
+            }
+        }        
+    }
+
+    return RES_OK;
+}
+
+Result gc9a01_draw_colors_from_bitmask(uint8_t *mask, size_t len_bytes, GC9A01_Color fg_color, GC9A01_Color bg_color, GC9A01_Frame *frame, uint8_t scale) {
+    gc9a01_set_frame(frame);
+    gc9a01_write_cmd_code(GC9A01A_RAMWR);
+
+    if (scale == 0) return RES_BAD_PARAM;
+    else if (scale == 1) {
+        while (len_bytes-- > 0) { 
+            uint8_t byte = *mask;
+            for (uint8_t i = 0; i < 8; i++) {
+                if ( byte & 0x1) gc9a01_write_color(fg_color); else gc9a01_write_color(bg_color);
+                byte >>= 1; 
+            }
+            mask += 1;
+        };
+    }
+    else {
+        uint8_t pixels_x = (frame->x1 - frame->x0);
+        uint8_t pixels_y = (frame->y1 - frame->y0);
+        uint8_t cols = pixels_x / scale;
+        if (pixels_x % scale) cols++;
+        uint8_t rows = pixels_y / scale;
+        if (pixels_y % scale) rows++;
+
+        if (len_bytes * 8 < (rows * cols)) return RES_OUT_OF_BOUNDS;
+
+        for (uint8_t r = 0; r < rows; r++) {
+            for (uint8_t i = 0; i < scale; i++) {
+                for (uint8_t c = 0; c < cols; c++) {
+                    for (uint8_t j = 0; j < scale; j++) {
+                        size_t color_no = r * rows + c;
+                        size_t byte_no = color_no / 8;
+                        size_t bit_no = color_no % 8;
+
+                        if (mask[byte_no] & (0x1 << bit_no)) gc9a01_write_color(fg_color); else gc9a01_write_color(bg_color);
+                    }
+                } 
+            }
+        } 
+    }
+
+    return RES_OK;
+}
+

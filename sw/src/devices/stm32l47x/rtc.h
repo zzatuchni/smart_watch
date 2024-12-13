@@ -22,6 +22,10 @@ typedef struct {
 #define RTC_TR_ST ((RTC->TR & (BIT(4) | BIT(5) | BIT(6))) >> 4)
 #define RTC_TR_SU ((RTC->TR & (BIT(0) | BIT(1) | BIT(2) | BIT(3))) >> 0)
 
+#define RTC_SET_TR_H(x) (RTC->TR |= ((((uint32_t)x) / 10) << 20) | ((((uint32_t)x) % 10) << 16))
+#define RTC_SET_TR_M(x) (RTC->TR |= ((((uint32_t)x) / 10) << 12) | ((((uint32_t)x) % 10) << 8))
+#define RTC_SET_TR_S(x) (RTC->TR |= ((((uint32_t)x) / 10) << 4) | ((((uint32_t)x) % 10) << 0))
+
 #define RTC_DR_YT ((RTC->DR & (BIT(20) | BIT(21) | BIT(22) | BIT(23))) >> 20)
 #define RTC_DR_YU ((RTC->DR & (BIT(16) | BIT(17) | BIT(18) | BIT(19))) >> 16)
 #define RTC_DR_WD ((RTC->DR & (BIT(13) | BIT(14) | BIT(15))) >> 13)
@@ -29,6 +33,11 @@ typedef struct {
 #define RTC_DR_MU ((RTC->DR & (BIT(8) | BIT(9) | BIT(10) | BIT(11))) >> 8)
 #define RTC_DR_DT ((RTC->DR & (BIT(4) | BIT(5))) >> 4)
 #define RTC_DR_DU ((RTC->DR & (BIT(0) | BIT(1) | BIT(2) | BIT(3))) >> 0)
+
+#define RTC_SET_DR_Y(x) (RTC->TR |= ((((uint32_t)x) / 10) << 20) | ((((uint32_t)x) % 10) << 16))
+#define RTC_SET_DR_WD(x) (RTC->TR |= (((uint32_t)x) << 13))
+#define RTC_SET_DR_M(x) (RTC->TR |= ((((uint32_t)x) / 10) << 12) | ((((uint32_t)x) % 10) << 8))
+#define RTC_SET_DR_D(x) (RTC->TR |= ((((uint32_t)x) / 10) << 4) | ((((uint32_t)x) % 10) << 0))
 
 // DPB bit in PWR, write code in WPR
 #define RTC_DISABLE_WRITE_PROTECTION() { PWR->CR[0] |= BIT(8); RTC->WPR = 0xCA; RTC->WPR = 0x53; }
@@ -53,6 +62,8 @@ extern const uint8_t month_szs[12];
 Result rtc_init();
 
 Result rtc_get_time(Time *time);
+
+Result rtc_set_time(Time *time);
 
 size_t write_weekday_str(uint8_t wkday, char *buf);
 

@@ -5,6 +5,21 @@
 #include "devices/stm32l47x/rtc.h"
 #include "devices/gc9a01/gc9a01.h"
 
+const GC9A01_Color colors[] = {
+    0x0000, 0x00FF, 0x0000, 0x00FF, 0x0000,
+    0x00FF, 0x0000, 0x00FF, 0x0000, 0x00FF,
+    0x0000, 0x00FF, 0x0000, 0x00FF, 0x0000,
+    0x00FF, 0x0000, 0x00FF, 0x0000, 0x00FF,
+    0x0000, 0x00FF, 0x0000, 0x00FF, 0x0000,
+};
+
+const uint8_t colors_mask[] = {
+    0b01010101, 0b10101010,
+    0b01010101, 0b10101010,
+    0b01010101, 0b10101010,
+    0b01010101, 0b10101010,
+};
+
 ////////////////////////////////////////////////////////////
 //  Startup code 
 ////////////////////////////////////////////////////////////
@@ -40,19 +55,17 @@ int main(void) {
     res = gc9a01_init();
     if (res) { for (;;) {} };
 
-    uint16_t color = GC9A01A_BLUE;
-
-    gc9a01_set_frame(0, 0, 240, 240);
-    gc9a01_write_cmd_code(GC9A01A_RAMWR);
-
+    GC9A01_Frame frame = {0, 0, GC9A01A_TFTWIDTH-1, GC9A01A_TFTHEIGHT-1};
+    
     rtc_init();
 
-    uint32_t num_pixels = (GC9A01A_TFTWIDTH * GC9A01A_TFTHEIGHT);
     Time time;    
 
     for (;;) {
-        for (uint32_t i = 0; i < num_pixels; i++)
-            gc9a01_write_colors(&color, 1);
+        //res = gc9a01_draw_colors(colors, 25, &frame, 48);
+        res = gc9a01_draw_colors_from_bitmask(colors_mask, 8, GC9A01A_MAGENTA, GC9A01A_BLACK, &frame, 30);
+        if (res == RES_BAD_PARAM) uart_write_buf(USART2, "LCDBP!\r\n", 8);
+        if (res == RES_OUT_OF_BOUNDS) uart_write_buf(USART2, "LCDOB!\r\n", 8);
 
         rtc_get_time(&time);
         
