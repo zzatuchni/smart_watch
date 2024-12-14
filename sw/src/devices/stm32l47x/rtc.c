@@ -10,6 +10,8 @@ Result rtc_init() {
     RCC->APB1ENR1 |= BIT(PWR_APB1ENR1_BIT);
     RCC->APB1ENR1 |= BIT(RTC_APB1ENR1_BIT);
 
+    RTC_DISABLE_WRITE_PROTECTION();
+
     // Configure LSE / RTC
     RCC->BDCR |= BIT(8); //RTCSEL = 0x1 = LSE
 
@@ -18,8 +20,6 @@ Result rtc_init() {
     while (!(RCC->BDCR & BIT(1))) {}; //LSERDY, LSE ready
 
     /*
-    RTC_DISABLE_WRITE_PROTECTION();
-
     RTC->ISR |= BIT(7); // INIT, enable initialization mode
 
     while (!(RTC->ISR & BIT(6))) {}; // INITF, initialization mode entered
@@ -29,13 +29,17 @@ Result rtc_init() {
     
     RTC->ISR &= ~BIT(7); // INIT, disable initialization mode
 
-    RTC_ENABLE_WRITE_PROTECTION();
     */
+
+    
+
 
     RCC->BDCR |= BIT(15); //RTCEN, RTC clock enable
     
     RTC->ISR &= ~BIT(5);
     while (!(RTC->ISR & BIT(5))) {}; // RSF, synchronization
+
+    RTC_ENABLE_WRITE_PROTECTION();
 
     return RES_OK;
 }

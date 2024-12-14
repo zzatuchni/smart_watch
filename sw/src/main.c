@@ -5,20 +5,7 @@
 #include "devices/stm32l47x/rtc.h"
 #include "devices/gc9a01/gc9a01.h"
 
-const GC9A01_Color colors[] = {
-    0x0000, 0x00FF, 0x0000, 0x00FF, 0x0000,
-    0x00FF, 0x0000, 0x00FF, 0x0000, 0x00FF,
-    0x0000, 0x00FF, 0x0000, 0x00FF, 0x0000,
-    0x00FF, 0x0000, 0x00FF, 0x0000, 0x00FF,
-    0x0000, 0x00FF, 0x0000, 0x00FF, 0x0000,
-};
-
-const uint8_t colors_mask[] = {
-    0b01010101, 0b10101010,
-    0b01010101, 0b10101010,
-    0b01010101, 0b10101010,
-    0b01010101, 0b10101010,
-};
+#include "images/images_test.h"
 
 ////////////////////////////////////////////////////////////
 //  Startup code 
@@ -31,9 +18,58 @@ void led_init(STM32_Pin led_pin) {
     gpio_set_mode(GPIO_MODE_OUTPUT, led_pin);
 }
 
-char buf[8];
-char date_buf[64];
+char dbg_date_buf[8];
 
+char date_buf[6] = {'1','2','3','4','5','6'};
+char date_buf_prev[6] = {'1','2','3','4','5','6'};
+
+const uint8_t *character_bitmap_bufs[10] = 
+    {character_0, character_1, character_2, character_3, character_4, character_5, character_6, character_7, character_8, character_9};
+
+const GC9A01_Frame bg_frame = {0, 0, GC9A01A_TFTWIDTH, GC9A01A_TFTHEIGHT};
+const GC9A01_Frame ht_frame = {168, 40, 48, 96};
+const GC9A01_Frame hu_frame = {120, 40, 48, 96};
+const GC9A01_Frame mt_frame = {72, 40, 48, 96};
+const GC9A01_Frame mu_frame = {24, 40, 48, 96};
+
+const GC9A01_Frame st_frame = {120, 136, 48, 96};
+const GC9A01_Frame su_frame = {72, 136, 48, 96};
+
+void dbg_print_date(Time *time) {
+    int_to_str(time->weekday, dbg_date_buf, 8, 10);
+    uart_write_buf(USART2, "WD ", 3);
+    uart_write_buf(USART2, dbg_date_buf, 8);
+
+    int_to_str(time->year, dbg_date_buf, 8, 10);
+    uart_write_buf(USART2, " Y ", 3);
+    uart_write_buf(USART2, dbg_date_buf, 8);
+
+    int_to_str(time->month, dbg_date_buf, 8, 10);
+    uart_write_buf(USART2, " M ", 3);
+    uart_write_buf(USART2, dbg_date_buf, 8);
+
+    int_to_str(time->day, dbg_date_buf, 8, 10);
+    uart_write_buf(USART2, " D ", 3);
+    uart_write_buf(USART2, dbg_date_buf, 8);
+
+    int_to_str(time->hour, dbg_date_buf, 8, 10);
+    uart_write_buf(USART2, " h ", 3);
+    uart_write_buf(USART2, dbg_date_buf, 8);
+
+    int_to_str(time->minute, dbg_date_buf, 8, 10);
+    uart_write_buf(USART2, " m ", 3);
+    uart_write_buf(USART2, dbg_date_buf, 8);
+
+    int_to_str(time->second, dbg_date_buf, 8, 10);
+    uart_write_buf(USART2, " s ", 3);
+    uart_write_buf(USART2, dbg_date_buf, 8);
+
+    int_to_str(time->subsecond, dbg_date_buf, 8, 10);
+    uart_write_buf(USART2, " ss ", 4);
+    uart_write_buf(USART2, dbg_date_buf, 8);
+
+    uart_write_buf(USART2, "\r\n", 2);
+}
 
 int main(void) {
 
@@ -54,56 +90,41 @@ int main(void) {
 
     res = gc9a01_init();
     if (res) { for (;;) {} };
-
-    GC9A01_Frame frame = {0, 0, GC9A01A_TFTWIDTH-1, GC9A01A_TFTHEIGHT-1};
     
     rtc_init();
 
     Time time;    
 
+    // draw the backround
+    res = gc9a01_draw_colors_from_bitmask(checkerboard, 29, GC9A01A_BLUE2, GC9A01A_BLUE3, &bg_frame, 16);
+
     for (;;) {
-        //res = gc9a01_draw_colors(colors, 25, &frame, 48);
-        res = gc9a01_draw_colors_from_bitmask(colors_mask, 8, GC9A01A_MAGENTA, GC9A01A_BLACK, &frame, 30);
-        if (res == RES_BAD_PARAM) uart_write_buf(USART2, "LCDBP!\r\n", 8);
-        if (res == RES_OUT_OF_BOUNDS) uart_write_buf(USART2, "LCDOB!\r\n", 8);
-
         rtc_get_time(&time);
-        
-        int_to_str(time.weekday, buf, 8, 10);
-        uart_write_buf(USART2, "WD ", 3);
-        uart_write_buf(USART2, buf, 8);
 
-        int_to_str(time.year, buf, 8, 10);
-        uart_write_buf(USART2, " Y ", 3);
-        uart_write_buf(USART2, buf, 8);
+        //dbg_print_date(&time);
 
-        int_to_str(time.month, buf, 8, 10);
-        uart_write_buf(USART2, " M ", 3);
-        uart_write_buf(USART2, buf, 8);
+        int_to_str(time.hour, date_buf, 2, 10);
+        int_to_str(time.minute, date_buf + 2, 2, 10);
+        int_to_str(time.second, date_buf + 4, 2, 10);
 
-        int_to_str(time.day, buf, 8, 10);
-        uart_write_buf(USART2, " D ", 3);
-        uart_write_buf(USART2, buf, 8);
+        if (!str_cmp(date_buf, date_buf_prev, 2)) {
+            gc9a01_draw_colors_from_bitmask(character_bitmap_bufs[date_buf[0]-48], 16, GC9A01A_WHITE, GC9A01A_BLACK, &ht_frame, 6);
+            gc9a01_draw_colors_from_bitmask(character_bitmap_bufs[date_buf[1]-48], 16, GC9A01A_RED, GC9A01A_BLACK, &hu_frame, 6);
+        }
 
-        int_to_str(time.hour, buf, 8, 10);
-        uart_write_buf(USART2, " h ", 3);
-        uart_write_buf(USART2, buf, 8);
+        if (!str_cmp(date_buf+2, date_buf_prev+2, 2)) {
+            gc9a01_draw_colors_from_bitmask(character_bitmap_bufs[date_buf[2]-48], 16, GC9A01A_WHITE, GC9A01A_BLACK, &mt_frame, 6);
+            gc9a01_draw_colors_from_bitmask(character_bitmap_bufs[date_buf[3]-48], 16, GC9A01A_RED, GC9A01A_BLACK, &mu_frame, 6);
+        }
 
-        int_to_str(time.minute, buf, 8, 10);
-        uart_write_buf(USART2, " m ", 3);
-        uart_write_buf(USART2, buf, 8);
+        if (!str_cmp(date_buf+4, date_buf_prev+4, 2)) {
+            gc9a01_draw_colors_from_bitmask(character_bitmap_bufs[date_buf[4]-48], 16, GC9A01A_WHITE, GC9A01A_BLACK, &st_frame, 6);
+            gc9a01_draw_colors_from_bitmask(character_bitmap_bufs[date_buf[5]-48], 16, GC9A01A_RED, GC9A01A_BLACK, &su_frame, 6);   
+        }
 
-        int_to_str(time.second, buf, 8, 10);
-        uart_write_buf(USART2, " s ", 3);
-        uart_write_buf(USART2, buf, 8);
+        str_copy(date_buf, date_buf_prev, 6);
 
-        int_to_str(time.subsecond, buf, 8, 10);
-        uart_write_buf(USART2, " ss ", 4);
-        uart_write_buf(USART2, buf, 8);
-
-        uart_write_buf(USART2, "\r\n", 2);
-
-        spin(1000000);
+        spin(2000);
     }
 
     return 0;

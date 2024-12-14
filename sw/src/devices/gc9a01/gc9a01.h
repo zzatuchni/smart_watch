@@ -14,7 +14,7 @@ extern const uint8_t gc9a01_init_cmds[];
 
 typedef uint16_t GC9A01_Color;
 
-typedef struct { uint8_t x0; uint8_t y0; uint8_t x1; uint8_t y1; } GC9A01_Frame;
+typedef struct { uint8_t x; uint8_t y; uint8_t sx; uint8_t sy; } GC9A01_Frame;
 
 void gc9a01_write_cmd_code(uint8_t cmd);
 

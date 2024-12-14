@@ -135,16 +135,19 @@ Result gc9a01_set_frame(GC9A01_Frame *frame)
 {
     uint8_t data[4];
 
-    data[0] = (frame->x0 >> 8) & 0xFF;
-    data[1] = frame->y0 & 0xFF;
-    data[2] = (frame->x1 >> 8) & 0xFF;
-    data[3] = frame->y1 & 0xFF;
+    uint8_t x1 = frame->x + frame->sx - 1U;
+    uint8_t y1 = frame->y + frame->sy - 1U;
+
+    data[0] = (frame->x >> 8) & 0xFF;
+    data[1] = frame->x & 0xFF;
+    data[2] = (x1 >> 8) & 0xFF;
+    data[3] = x1 & 0xFF;
     gc9a01_write_cmd(GC9A01A_CASET, data, sizeof(data));
 
-    data[0] = (frame->x0 >> 8) & 0xFF;
-    data[1] = frame->y0 & 0xFF;
-    data[2] = (frame->x1 >> 8) & 0xFF;
-    data[3] = frame->y1 & 0xFF;
+    data[0] = (frame->y >> 8) & 0xFF;
+    data[1] = frame->y & 0xFF;
+    data[2] = (y1 >> 8) & 0xFF;
+    data[3] = y1 & 0xFF;
     gc9a01_write_cmd(GC9A01A_RASET, data, sizeof(data));
 
     return RES_OK;
@@ -159,12 +162,10 @@ Result gc9a01_draw_colors(GC9A01_Color *colors, size_t num_colors, GC9A01_Frame 
         gc9a01_write_colors(colors, num_colors);
     }
     else {
-        uint8_t pixels_x = (frame->x1 - frame->x0);
-        uint8_t pixels_y = (frame->y1 - frame->y0);
-        uint8_t cols = pixels_x / scale;
-        if (pixels_x % scale) cols++;
-        uint8_t rows = pixels_y / scale;
-        if (pixels_y % scale) rows++;
+        uint8_t cols = frame->sx / scale;
+        if (frame->sx % scale) cols++;
+        uint8_t rows = frame->sy / scale;
+        if (frame->sy % scale) rows++;
 
         if (num_colors < (rows * cols)) return RES_OUT_OF_BOUNDS;
 
@@ -198,12 +199,10 @@ Result gc9a01_draw_colors_from_bitmask(uint8_t *mask, size_t len_bytes, GC9A01_C
         };
     }
     else {
-        uint8_t pixels_x = (frame->x1 - frame->x0);
-        uint8_t pixels_y = (frame->y1 - frame->y0);
-        uint8_t cols = pixels_x / scale;
-        if (pixels_x % scale) cols++;
-        uint8_t rows = pixels_y / scale;
-        if (pixels_y % scale) rows++;
+        uint8_t cols = frame->sx / scale;
+        if (frame->sx % scale) cols++;
+        uint8_t rows = frame->sy / scale;
+        if (frame->sy % scale) rows++;
 
         if (len_bytes * 8 < (rows * cols)) return RES_OUT_OF_BOUNDS;
 
@@ -211,7 +210,7 @@ Result gc9a01_draw_colors_from_bitmask(uint8_t *mask, size_t len_bytes, GC9A01_C
             for (uint8_t i = 0; i < scale; i++) {
                 for (uint8_t c = 0; c < cols; c++) {
                     for (uint8_t j = 0; j < scale; j++) {
-                        size_t color_no = r * rows + c;
+                        size_t color_no = r * cols + c;
                         size_t byte_no = color_no / 8;
                         size_t bit_no = color_no % 8;
 

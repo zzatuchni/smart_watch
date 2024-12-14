@@ -73,6 +73,10 @@
 #define GC9A01A_GREENYELLOW 0xE5AF ///< 173, 255,  41
 #define GC9A01A_PINK 0x18FC        ///< 255, 130, 198
 
+#define GC9A01A_BLUE2 0x1000        ///<   0,   0, 255
+#define GC9A01A_BLUE3 0x1C22        ///<   0,   0, 255
+
+
 #define GC9A01A_MADCTL_MY 0x80  ///< Bottom to top
 #define GC9A01A_MADCTL_MX 0x40  ///< Right to left
 #define GC9A01A_MADCTL_MV 0x20  ///< Reverse Mode
