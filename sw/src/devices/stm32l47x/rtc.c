@@ -1,10 +1,5 @@
 #include "rtc.h"
 
-const char *weekday_strs[8] = {"NA", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-const uint8_t weekday_szs[8] = {2, 6, 7, 9, 8, 6, 8, 6};
-const char *month_strs[12] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-const uint8_t month_szs[12] = {7, 8, 5, 5, 3, 4, 4, 6, 9, 7, 8, 8};
-
 Result rtc_init() {
     // enable peripheral
     RCC->APB1ENR1 |= BIT(PWR_APB1ENR1_BIT);
@@ -17,36 +12,32 @@ Result rtc_init() {
 
     RCC->BDCR |= BIT(0); //LSEON, LSE oscillator enable
 
-    while (!(RCC->BDCR & BIT(1))) {}; //LSERDY, LSE ready
+    WAIT_FOR_CONDITION((RCC->BDCR & BIT(1)), GENERIC_TIMEOUT_NUM); //LSERDY, LSE ready
 
     /*
     RTC->ISR |= BIT(7); // INIT, enable initialization mode
 
-    while (!(RTC->ISR & BIT(6))) {}; // INITF, initialization mode entered
+    WAIT_FOR_CONDITION((RTC->ISR & BIT(6)), GENERIC_TIMEOUT_NUM); // INITF, initialization mode entered
 
     RTC->TR = 0x0;
     RTC->DR = 0x0;
     
     RTC->ISR &= ~BIT(7); // INIT, disable initialization mode
-
     */
-
-    
-
 
     RCC->BDCR |= BIT(15); //RTCEN, RTC clock enable
     
     RTC->ISR &= ~BIT(5);
-    while (!(RTC->ISR & BIT(5))) {}; // RSF, synchronization
+    WAIT_FOR_CONDITION((RTC->ISR & BIT(5)), GENERIC_TIMEOUT_NUM); // RSF, synchronization
 
     RTC_ENABLE_WRITE_PROTECTION();
 
     return RES_OK;
 }
 
-Result rtc_get_time(Time *time) {
+Result rtc_get_time(RTC_Time *time) {
     RTC->ISR &= ~BIT(5);
-    while (!(RTC->ISR & BIT(5))) {}; // RSF, synchronization
+    WAIT_FOR_CONDITION((RTC->ISR & BIT(5)), GENERIC_TIMEOUT_NUM); // RSF, synchronization
 
     time->hour =    (uint8_t)(RTC_TR_HT * 10 + RTC_TR_HU);
     time->minute =  (uint8_t)(RTC_TR_MT * 10 + RTC_TR_MU);
@@ -63,12 +54,12 @@ Result rtc_get_time(Time *time) {
     return RES_OK;
 }
 
-Result rtc_set_time(Time *time) {
+Result rtc_set_time(RTC_Time *time) {
     RTC_DISABLE_WRITE_PROTECTION();
 
     RTC->ISR |= BIT(7); // INIT, enable initialization mode
 
-    while (!(RTC->ISR & BIT(6))) {}; // INITF, initialization mode entered
+    WAIT_FOR_CONDITION((RTC->ISR & BIT(6)), GENERIC_TIMEOUT_NUM); // INITF, initialization mode entered
 
     RTC_SET_TR_H(time->hour);
     RTC_SET_TR_M(time->minute);
@@ -84,19 +75,7 @@ Result rtc_set_time(Time *time) {
     RTC_ENABLE_WRITE_PROTECTION();
 
     RTC->ISR &= ~BIT(5);
-    while (!(RTC->ISR & BIT(5))) {}; // RSF, synchronization
+    WAIT_FOR_CONDITION((RTC->ISR & BIT(5)), GENERIC_TIMEOUT_NUM); // RSF, synchronization
 
     return RES_OK;
-}
-
-size_t write_weekday_str(uint8_t wkday, char *buf) {
-    size_t sz = (size_t)weekday_szs[wkday];
-    str_copy(weekday_strs[wkday], buf, sz);
-    return sz;
-}
-
-size_t write_month_str(uint8_t month, char *buf) {
-    size_t sz = (size_t)month_szs[month];
-    str_copy(month_strs[month], buf, sz);
-    return sz;
 }

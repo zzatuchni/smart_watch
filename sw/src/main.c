@@ -5,7 +5,7 @@
 #include "devices/stm32l47x/rtc.h"
 #include "devices/gc9a01/gc9a01.h"
 
-#include "images/images_test.h"
+#include "images/test_font.h"
 
 ////////////////////////////////////////////////////////////
 //  Startup code 
@@ -18,82 +18,63 @@ void led_init(STM32_Pin led_pin) {
     gpio_set_mode(GPIO_MODE_OUTPUT, led_pin);
 }
 
-char dbg_date_buf[8];
-
 char date_buf[6] = {'1','2','3','4','5','6'};
 char date_buf_prev[6] = {'1','2','3','4','5','6'};
 
 const uint8_t *character_bitmap_bufs[10] = 
     {character_0, character_1, character_2, character_3, character_4, character_5, character_6, character_7, character_8, character_9};
 
-const GC9A01_Frame bg_frame = {0, 0, GC9A01A_TFTWIDTH, GC9A01A_TFTHEIGHT};
-const GC9A01_Frame ht_frame = {168, 40, 48, 96};
-const GC9A01_Frame hu_frame = {120, 40, 48, 96};
-const GC9A01_Frame mt_frame = {72, 40, 48, 96};
-const GC9A01_Frame mu_frame = {24, 40, 48, 96};
+GC9A01_Frame bg_frame = {0, 0, GC9A01A_TFTWIDTH, GC9A01A_TFTHEIGHT};
+GC9A01_Frame ht_frame = {168, 40, 48, 96};
+GC9A01_Frame hu_frame = {120, 40, 48, 96};
+GC9A01_Frame mt_frame = {72, 40, 48, 96};
+GC9A01_Frame mu_frame = {24, 40, 48, 96};
 
-const GC9A01_Frame st_frame = {120, 136, 48, 96};
-const GC9A01_Frame su_frame = {72, 136, 48, 96};
+GC9A01_Frame st_frame = {120, 136, 48, 96};
+GC9A01_Frame su_frame = {72, 136, 48, 96};
 
-void dbg_print_date(Time *time) {
-    int_to_str(time->weekday, dbg_date_buf, 8, 10);
-    uart_write_buf(USART2, "WD ", 3);
-    uart_write_buf(USART2, dbg_date_buf, 8);
+void dbg_print_date(RTC_Time *time) {
+    DPRINT("WD ");
+    DPRINTN(time->weekday);
 
-    int_to_str(time->year, dbg_date_buf, 8, 10);
-    uart_write_buf(USART2, " Y ", 3);
-    uart_write_buf(USART2, dbg_date_buf, 8);
+    DPRINT(" Y ");
+    DPRINTN(time->year);
 
-    int_to_str(time->month, dbg_date_buf, 8, 10);
-    uart_write_buf(USART2, " M ", 3);
-    uart_write_buf(USART2, dbg_date_buf, 8);
+    DPRINT(" M ");
+    DPRINTN(time->month);
 
-    int_to_str(time->day, dbg_date_buf, 8, 10);
-    uart_write_buf(USART2, " D ", 3);
-    uart_write_buf(USART2, dbg_date_buf, 8);
+    DPRINT(" D ");
+    DPRINTN(time->day);
 
-    int_to_str(time->hour, dbg_date_buf, 8, 10);
-    uart_write_buf(USART2, " h ", 3);
-    uart_write_buf(USART2, dbg_date_buf, 8);
+    DPRINT(" h ");
+    DPRINTN(time->hour);
 
-    int_to_str(time->minute, dbg_date_buf, 8, 10);
-    uart_write_buf(USART2, " m ", 3);
-    uart_write_buf(USART2, dbg_date_buf, 8);
+    DPRINT(" m ");
+    DPRINTN(time->minute);
 
-    int_to_str(time->second, dbg_date_buf, 8, 10);
-    uart_write_buf(USART2, " s ", 3);
-    uart_write_buf(USART2, dbg_date_buf, 8);
+    DPRINT(" s ");
+    DPRINTN(time->second);
 
-    int_to_str(time->subsecond, dbg_date_buf, 8, 10);
-    uart_write_buf(USART2, " ss ", 4);
-    uart_write_buf(USART2, dbg_date_buf, 8);
+    DPRINT(" ss ");
+    DPRINTN(time->subsecond);
 
-    uart_write_buf(USART2, "\r\n", 2);
+    DPRINTNL();
 }
 
 int main(void) {
+    ENABLE_DBG_TRACES();
 
     //systick_init(DEFAULT_SYSCLK_FREQ / 1000);
 
     //STM32_Pin led_pin = {LED_PIN_BANK, LED_PIN_NUMBER};
     //led_init(led_pin);
 
-    const UART_Config uart_cfg = {
-        USART2,     // uarts
-        {'A', 2},   // tx_pin
-        {'A', 3}    // rx_pin
-    };
-
-    Result res = uart_init(&uart_cfg);
-    if (res) { for (;;) {} };
-    uart_write_buf(USART2, "\33c", 2);
-
-    res = gc9a01_init();
-    if (res) { for (;;) {} };
+    Result res = gc9a01_init();
+    if (res) { DPRINT("LCD INIT ERR "); DPRINTN(res); for (;;) {} };
     
     rtc_init();
 
-    Time time;    
+    RTC_Time time;    
 
     // draw the backround
     res = gc9a01_draw_colors_from_bitmask(checkerboard, 29, GC9A01A_BLUE2, GC9A01A_BLUE3, &bg_frame, 16);

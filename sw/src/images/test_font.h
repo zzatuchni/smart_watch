@@ -4,7 +4,7 @@
 #define IMAGES_TEST_H
 
 // 15x15 grid with squares 16 pixels wide
-const uint8_t checkerboard[29] = {
+uint8_t const checkerboard[29] = {
     0b01010101, 0b01010101,
     0b01010101, 0b01010101,
     0b01010101, 0b01010101,
@@ -22,7 +22,7 @@ const uint8_t checkerboard[29] = {
     0b01010101,
 };
 
-const uint8_t character_0[16] = {
+uint8_t const character_0[16] = {
     0b11111111,
     0b11111111,
     0b11000011,
@@ -41,7 +41,7 @@ const uint8_t character_0[16] = {
     0b11111111,
 };
 
-const uint8_t character_1[16] = {
+uint8_t const character_1[16] = {
     0b00011000,
     0b00011000,
     0b00011000,
@@ -60,9 +60,7 @@ const uint8_t character_1[16] = {
     0b00011000,
 };
 
-
-
-const uint8_t character_2[16] = {
+uint8_t const character_2[16] = {
     0b11111111,
     0b11111111,
     0b00000011,
@@ -81,7 +79,7 @@ const uint8_t character_2[16] = {
     0b11111111,
 };
 
-const uint8_t character_3[16] = {
+uint8_t const character_3[16] = {
     0b11111111,
     0b11111111,
     0b00000011,
@@ -100,7 +98,7 @@ const uint8_t character_3[16] = {
     0b11111111,
 };
 
-const uint8_t character_4[16] = {
+uint8_t const character_4[16] = {
     0b11000011,
     0b11000011,
     0b11000011,
@@ -119,7 +117,7 @@ const uint8_t character_4[16] = {
     0b00000011,
 };
 
-const uint8_t character_5[16] = {
+uint8_t const character_5[16] = {
     0b11111111,
     0b11111111,
     0b11000000,
@@ -138,7 +136,7 @@ const uint8_t character_5[16] = {
     0b11111111,
 };
 
-const uint8_t character_6[16] = {
+uint8_t const character_6[16] = {
     0b11111111,
     0b11111111,
     0b11000000,
@@ -157,7 +155,7 @@ const uint8_t character_6[16] = {
     0b11111111,
 };
 
-const uint8_t character_7[16] = {
+uint8_t const character_7[16] = {
     0b11111111,
     0b11111111,
     0b00000011,
@@ -176,7 +174,7 @@ const uint8_t character_7[16] = {
     0b00000011,
 };
 
-const uint8_t character_8[16] = {
+uint8_t const character_8[16] = {
     0b11111111,
     0b11111111,
     0b11000011,
@@ -195,7 +193,7 @@ const uint8_t character_8[16] = {
     0b11111111,
 };
 
-const uint8_t character_9[16] = {
+uint8_t const character_9[16] = {
     0b11111111,
     0b11111111,
     0b11000011,

@@ -8,11 +8,12 @@
 
 #define BIT(x) (1UL << (x))
 #define BYTE_SWAP(x) ((((x) & 0xFF00) >> 8) + (((x) & 0x00FF) << 8))
-
-#define GENERIC_TIMEOUT_NUM 2000000
 typedef enum {
     RES_OK, RES_TIMEOUT, RES_BAD_PARAM, RES_NOT_SUPPORTED, RES_OUT_OF_BOUNDS
 } Result;
+
+#define GENERIC_TIMEOUT_NUM 2000000
+#define WAIT_FOR_CONDITION(cond, timeout) { size_t i = 0; while(!(cond)) { if (i++ >= (timeout)) return RES_TIMEOUT; } }
 
  __attribute__((optimize("O0"))) void spin(uint32_t count);
 

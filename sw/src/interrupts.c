@@ -1,22 +1,22 @@
 #include "interrupts.h"
 
 void _on_hard_fault(void) {
-    uart_write_buf(USART2, "*HF*", 4);
+    DPRINT("*HF*");
     spin(50000);
 }
 
 void _on_mem_fault(void) {
-    uart_write_buf(USART2, "*MF*", 4);
+    DPRINT("*MF*");
     spin(50000);
 }
 
 void _on_bus_fault(void) {
-    uart_write_buf(USART2, "*BF*", 4);
+    DPRINT("*BF*");
     spin(50000);
 }
 
 void _on_usage_fault(void) {
-    uart_write_buf(USART2, "*UF*", 4);
+    DPRINT("*UF*");
     spin(50000);
 }
 

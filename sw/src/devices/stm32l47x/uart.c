@@ -1,5 +1,7 @@
 #include "uart.h"
 
+char temp_number_buffer[32];
+
 Result uart_init(const UART_Config *config) {
 
     // enable peripheral in RCC and get af_num and interrupt_num
@@ -99,12 +101,24 @@ void uart_write_buf(UART_Regs *uart, char *buf, size_t len) {
     while (len-- > 0) uart_write_byte(uart, *(uint8_t *) buf++);
 }
 
-void uart_write_value(UART_Regs *uart, uint32_t val) {
-    for (uint8_t i = 0; i < 32; i++) {
-        uint32_t b = val & BIT(0);
-        if (b) uart_write_byte(uart, '1'); else uart_write_byte(uart, '0');
-        val = val >> 0x1U;
+void uart_write_number(UART_Regs *uart, uint32_t x, uint8_t radix) {
+    bool leading_zero = true;
+    if (radix == 8) uart_write_buf(uart, "0x", 2);
+    else if (radix == 2) uart_write_buf(uart, "0b", 2);
+    for (size_t i = 32; i > 0; i--) {
+        uint32_t rem = x % radix;
+        x /= radix;
+        if (rem < 10) {
+            temp_number_buffer[i-1] = '0' + rem;
+        }
+        else {
+            temp_number_buffer[i-1] = 'a' + (rem - 10);
+        }
     }
-    uart_write_byte(uart, '\r');
-    uart_write_byte(uart, '\n');
+    for (size_t i = 0; i < 32; i++) {
+        if (temp_number_buffer[i] != '0' || !leading_zero || (i == 31)) {
+            if (leading_zero) leading_zero = false;
+            uart_write_byte(uart, temp_number_buffer[i]);
+        }
+    }
 }

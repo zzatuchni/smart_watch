@@ -52,18 +52,13 @@ typedef struct {
     uint8_t minute;
     uint8_t second;
     uint16_t subsecond;
-} Time;
-
-extern const char *weekday_strs[8];
-extern const uint8_t weekday_szs[8];
-extern const char *month_strs[12];
-extern const uint8_t month_szs[12];
+} RTC_Time;
 
 Result rtc_init();
 
-Result rtc_get_time(Time *time);
+Result rtc_get_time(RTC_Time *time);
 
-Result rtc_set_time(Time *time);
+Result rtc_set_time(RTC_Time *time);
 
 size_t write_weekday_str(uint8_t wkday, char *buf);
 
