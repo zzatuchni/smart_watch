@@ -1,4 +1,3 @@
-#include "interrupts.h"
 #include "devices/stm32l47x/basic.h"
 #include "devices/stm32l47x/gpio.h"
 #include "devices/stm32l47x/uart.h"
@@ -6,6 +5,9 @@
 #include "devices/gc9a01/gc9a01.h"
 
 #include "images/test_font.h"
+
+#include "interrupts.h"
+#include "debug.h"
 
 ////////////////////////////////////////////////////////////
 //  Startup code 
@@ -64,7 +66,7 @@ void dbg_print_date(RTC_Time *time) {
 int main(void) {
     ENABLE_DBG_TRACES();
 
-    //systick_init(DEFAULT_SYSCLK_FREQ / 1000);
+    systick_init(DEFAULT_SYSCLK_FREQ / 1000);
 
     //STM32_Pin led_pin = {LED_PIN_BANK, LED_PIN_NUMBER};
     //led_init(led_pin);

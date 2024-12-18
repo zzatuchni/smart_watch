@@ -2,7 +2,7 @@
 #define INTERRUPTS_H
 
 #include "util.h"
-#include "devices/stm32l47x/uart.h"
+#include "debug.h"
 
 void _on_hard_fault(void);
 

@@ -60,8 +60,4 @@ Result rtc_get_time(RTC_Time *time);
 
 Result rtc_set_time(RTC_Time *time);
 
-size_t write_weekday_str(uint8_t wkday, char *buf);
-
-size_t write_month_str(uint8_t month, char *buf);
-
 #endif
