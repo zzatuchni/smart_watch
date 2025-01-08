@@ -20,7 +20,7 @@ Result spi_init(const SPI_Config *config) {
             af_num = SPI3_AF_NUMBER;
             break;
         default:
-            return -1;
+            return RES_BAD_PARAM;
     }
 
     // configure the pin gpio
@@ -86,7 +86,7 @@ Result spi_init(const SPI_Config *config) {
             RCC->APB1RSTR1 &= ~BIT(SPI3_APB1ENR1_BIT);
             break;
         default:
-            return -1;
+            return RES_BAD_PARAM;
     }
 
     // CPHA (second transition = first data capture), CPOL (CLK = 1 when idle), MSTR (master config)
