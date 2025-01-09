@@ -2,7 +2,9 @@
 #include "devices/stm32l47x/gpio.h"
 #include "devices/stm32l47x/uart.h"
 #include "devices/stm32l47x/rtc.h"
+
 #include "devices/gc9a01/gc9a01.h"
+#include "devices/sht41/sht41.h"
 
 #include "images/test_font.h"
 
@@ -22,6 +24,7 @@ void led_init(STM32_Pin led_pin) {
 
 char date_buf[6] = {'1','2','3','4','5','6'};
 char date_buf_prev[6] = {'1','2','3','4','5','6'};
+char temp_hum_buf[6] = {0};
 
 const uint8_t *character_bitmap_bufs[10] = 
     {character_0, character_1, character_2, character_3, character_4, character_5, character_6, character_7, character_8, character_9};
@@ -74,7 +77,18 @@ int main(void) {
     Result res = gc9a01_init();
     if (res) { DPRINT("LCD INIT ERR "); DPRINTN(res); for (;;) {} };
     
-    rtc_init();
+    res = rtc_init();
+    if (res) { DPRINT("RTC INIT ERR "); DPRINTN(res); for (;;) {} };
+
+    res = sht41_init();
+    if (res) { DPRINT("SHT41 INIT ERR "); DPRINTN(res); for (;;) {} };
+
+    res = sht41_get_temp_hum_data(&temp_hum_buf, SHT41_HI_PREC);
+    if (res) { DPRINT("GET TEMP ERR "); DPRINTN(res); for (;;) {} };
+
+    for (size_t i = 0; i < 6; i++) {
+        DPRINTH(temp_hum_buf[i]);
+    }
 
     RTC_Time time;    
 
@@ -83,8 +97,6 @@ int main(void) {
 
     for (;;) {
         rtc_get_time(&time);
-
-        //dbg_print_date(&time);
 
         int_to_str(time.hour, date_buf, 2, 10);
         int_to_str(time.minute, date_buf + 2, 2, 10);
@@ -106,6 +118,8 @@ int main(void) {
         }
 
         str_copy(date_buf, date_buf_prev, 6);
+
+        DPRINTNL();
 
         spin(2000);
     }
