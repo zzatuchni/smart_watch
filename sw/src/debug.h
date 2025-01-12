@@ -18,8 +18,8 @@
         {'A', 2},\
         {'A', 3}\
     };\
-    Result res = uart_init(&uart_cfg);\
-    if (res) { for (;;) {} };\
+    Result dbg_init_res = uart_init(&uart_cfg);\
+    if (dbg_init_res) { for (;;) {} };\
     DCLRSCRN();\
     DPRINTLN("DEBUG TRACES ON");\
 }

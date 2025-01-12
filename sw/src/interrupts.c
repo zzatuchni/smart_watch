@@ -22,7 +22,18 @@ void _on_usage_fault(void) {
 
 void _on_systick(void) {}
 
-void _on_uart2_interrupt(void) {
-    uint8_t byte = uart_read_byte(USART2);
-    uart_write_byte(USART2, byte);
+void _on_uart2_interrupt(void) {}
+
+
+
+void _on_button1_press(void) {
+    EXTI_Regs *exti = (EXTI_Regs *)EXTI_REGS1_START_ADDRESS;
+    exti->PR |= (1UL << BUTTON1_PIN_NO);
+
+    button1_pressed = true;
 }
+
+//void _on_uart2_interrupt(void) {
+//    uint8_t byte = uart_read_byte(USART2);
+//    uart_write_byte(USART2, byte);
+//}

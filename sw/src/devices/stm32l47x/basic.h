@@ -24,7 +24,7 @@ typedef struct {
 //  Syscfg
 ////////////////////////////////////////////////////////////
 
-#define SYSCFG_REGS_START_ADDRESS 0x40013800
+#define SYSCFG_REGS_START_ADDRESS 0x40010000
 
 typedef struct {
     volatile uint32_t MEMRMP, CFGR1, EXTICR[4], SCSR, CFGR2, SWPR, SKR, SWPR2;
