@@ -14,6 +14,7 @@ Result rtc_init() {
 
     WAIT_FOR_CONDITION((RCC->BDCR & BIT(1)), GENERIC_TIMEOUT_NUM); //LSERDY, LSE ready
 
+    /*
     RTC->ISR |= BIT(7); // INIT, enable initialization mode
 
     WAIT_FOR_CONDITION((RTC->ISR & BIT(6)), GENERIC_TIMEOUT_NUM); // INITF, initialization mode entered
@@ -23,6 +24,7 @@ Result rtc_init() {
     RTC->SSR = RTC->BKPxR[2];
     
     RTC->ISR &= ~BIT(7); // INIT, disable initialization mode
+    */
 
     RCC->BDCR |= BIT(15); //RTCEN, RTC clock enable
     

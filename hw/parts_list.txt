@@ -1,0 +1,27 @@
+
+Chips:
+
+-   microcontroller         -   STM32L476RGT6U
+
+-   temp / humidity sensor  -   sht41
+
+-   lcd driver              -   gc9a01
+
+-   magnetometer            -   lis2mdl
+
+-   pmic                    -   nPM1300
+
+Connectors:
+
+
+Resistors:
+
+
+Capacitors:
+
+
+Misc:
+
+-   N x LED
+
+-   N x button
