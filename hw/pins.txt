@@ -1,0 +1,14 @@
+
+I2C:
+
+{'B', 8},   // scl_pin
+{'B', 9},   // sda_pin
+
+SPI:
+
+{'B', 6},       // cs_pin,          NUCLEO D10
+{'A', 5},       // sclk_pin         NUCLEO D13
+{'A', 6},       // miso_pin         NUCLEO D12
+{'A', 7},       // mosi_pin         NUCLEO D11
+{'A', 8},       // rst_pin          NUCLEO D7
+{'A', 10},      // dc_pin           NUCLEO D2
