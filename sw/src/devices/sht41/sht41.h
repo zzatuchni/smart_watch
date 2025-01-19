@@ -15,7 +15,9 @@ typedef enum {
     SHT41_HI_PREC, SHT41_MED_PREC, SHT41_LOW_PREC 
 } SHT41_Precision;
 
-Result sht41_init();
+typedef struct {
+    
+} Temp_Humidity_Data;
 
 Result sht41_get_temp_hum_data(char *buf, SHT41_Precision prec);
 

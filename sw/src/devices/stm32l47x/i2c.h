@@ -35,6 +35,8 @@ typedef struct {
     STM32_Pin sda_pin;
 } I2C_Config;
 
+extern const I2C_Config common_i2c_config;
+
 // Only doing master mode right now
 Result i2c_init(const I2C_Config *config);
 

@@ -1,5 +1,11 @@
 #include "i2c.h"
 
+const I2C_Config common_i2c_config = {
+    I2C1,       // i2c
+    {'B', 8},   // scl_pin
+    {'B', 9},   // sda_pin
+};
+
 // Only doing master mode right now
 Result i2c_init(const I2C_Config *config) {
 
@@ -41,10 +47,19 @@ Result i2c_init(const I2C_Config *config) {
     return RES_OK;
 }
 
+Result wait_for_nack_clear(I2C_Regs *i2c) {
+    WAIT_FOR_CONDITION(~(i2c->CR2 & BIT(4)), GENERIC_TIMEOUT_NUM);
+    return RES_OK;
+}
+
 Result i2c_write_buf(I2C_Regs *i2c, I2C_Address addr, char *buf, size_t len) {
+    DPRINT("WRITE\r\n");
+    
+    //reset CR2
+    i2c->CR2 = 0x0;
 
     // set slave address
-    i2c->CR2 |= addr;
+    i2c->CR2 |= (uint32_t)addr << 1;
 
     // set transfer direction to write
     i2c->CR2 &= ~BIT(10);
@@ -52,44 +67,45 @@ Result i2c_write_buf(I2C_Regs *i2c, I2C_Address addr, char *buf, size_t len) {
     // set nbytes to transfer
     i2c->CR2 |= (uint32_t)len << 16;
 
-    // auto stop
-    //i2c->CR2 &= ~BIT(25);
+    // auto end
+    i2c->CR2 |= BIT(25);
 
     // enable START bit
     i2c->CR2 |= BIT(13);
 
     // begin transfer
     while(len-- > 0) {
-        DPRINTB(i2c->CR2);
-        DPRINTNL();
-        DPRINTB(i2c->ISR);
-        DPRINTNL();
-
         // if nackf received, return error
-        if (i2c->ISR & BIT(4)) {
+        if (wait_for_nack_clear(i2c)) {
             // set nackcf
             i2c->ICR |= BIT(4);
             return RES_WRITE_NACK;
         }
 
         // if txe not set, continue
-        WAIT_FOR_CONDITION(i2c->ISR & BIT(0), GENERIC_TIMEOUT_NUM);
+        WAIT_FOR_CONDITION(i2c->ISR & BIT(1), GENERIC_TIMEOUT_NUM);
 
         // write byte to txdr
         i2c->TXDR = *(uint8_t *) buf++;
     }
 
+    DPRINT("DONEW\r\n");
+
     // check tc bit
-    WAIT_FOR_CONDITION(i2c->ISR & BIT(6), GENERIC_TIMEOUT_NUM);
+    WAIT_FOR_CONDITION(i2c->ISR & (BIT(5)), GENERIC_TIMEOUT_NUM);
     // stop bit
-    i2c->CR2 |= BIT(14);  
+    //i2c->CR2 |= BIT(14);  
     return RES_OK;
 }
 
 Result i2c_read_buf(I2C_Regs *i2c, I2C_Address addr, char *buf, size_t len) {
+    DPRINT("READ\r\n");
+    
+    //reset CR2
+    i2c->CR2 = 0x0;
 
     // set slave address
-    i2c->CR2 |= addr;
+    i2c->CR2 |= (uint32_t)addr << 1;
 
     // set transfer direction to read
     i2c->CR2 |= BIT(10);
@@ -97,13 +113,15 @@ Result i2c_read_buf(I2C_Regs *i2c, I2C_Address addr, char *buf, size_t len) {
     // set nbytes to transfer
     i2c->CR2 |= (uint32_t)len << 16;
 
+    // auto end
+    i2c->CR2 |= BIT(25);
+
     // enable START bit
     i2c->CR2 |= BIT(13);
 
     // begin transfer
     for (size_t i = 0; i < len; i++) {
-        // if nackf received, return error
-        if (i2c->ISR & BIT(4)) {
+        if (wait_for_nack_clear(i2c)) {
             // set nackcf
             i2c->ICR |= BIT(4);
             return RES_READ_NACK;
@@ -116,9 +134,11 @@ Result i2c_read_buf(I2C_Regs *i2c, I2C_Address addr, char *buf, size_t len) {
         buf[i] = i2c->RXDR;
     }
 
+    DPRINT("DONER\r\n");
+
     // check tc bit
-    WAIT_FOR_CONDITION(i2c->ISR & BIT(6), GENERIC_TIMEOUT_NUM);
+    WAIT_FOR_CONDITION(i2c->ISR & (BIT(5)), GENERIC_TIMEOUT_NUM);
     // stop bit
-    i2c->CR2 |= BIT(14);  
+    //i2c->CR2 |= BIT(14);  
     return RES_OK;
 }

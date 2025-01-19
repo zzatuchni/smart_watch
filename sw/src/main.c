@@ -5,6 +5,8 @@
 
 #include "devices/gc9a01/gc9a01.h"
 
+#include "devices/sht41/sht41.h"
+
 #include "devices/misc/misc.h"
 
 #include "images/test_font.h"
@@ -83,15 +85,8 @@ int main(void) {
     res = rtc_init();
     if (res) { DPRINT("RTC INIT ERR "); DPRINTN(res); for (;;) {} };
 
-    //res = sht41_init();
-    //if (res) { DPRINT("SHT41 INIT ERR "); DPRINTN(res); for (;;) {} };
-
-    //res = sht41_get_temp_hum_data(&temp_hum_buf, SHT41_HI_PREC);
-    //if (res) { DPRINT("GET TEMP ERR "); DPRINTN(res); for (;;) {} };
-
-    //for (size_t i = 0; i < 6; i++) {
-    //    DPRINTH(temp_hum_buf[i]);
-    //}
+    res = i2c_init(&common_i2c_config);
+    if (res) { DPRINT("I2C INIT ERR "); DPRINTN(res); for (;;) {} };
 
     RTC_Time time;    
 
@@ -130,7 +125,31 @@ int main(void) {
             if (res) { DPRINT("RTC SET TIME ERR "); DPRINTN(res); for (;;) {} };
         }
 
-        spin(2000);
+        res = sht41_get_temp_hum_data(&temp_hum_buf, SHT41_HI_PREC);
+        if (res) { DPRINT("GET TEMP ERR "); DPRINTN(res); for (;;) {} };
+
+        for (size_t i = 0; i < 6; i++) {
+            DPRINTH(temp_hum_buf[i]);
+        }
+        DPRINT("\r\n");
+
+        uint32_t t_ticks = temp_hum_buf[0] * 256 + temp_hum_buf[1];
+        uint32_t rh_ticks = temp_hum_buf[3] * 256 + temp_hum_buf[4];
+        uint32_t t_degC = -45 + 175 * t_ticks/65535;
+        uint32_t rh_pRH = -6 + 125 * rh_ticks/65535;
+        if (rh_pRH > 100)
+            rh_pRH = 100;
+        if (rh_pRH < 0)
+            rh_pRH = 0;
+
+        DPRINT("TEMP ");
+        DPRINTN(t_degC);
+        DPRINT("\r\n");
+        DPRINT("HUM ");
+        DPRINTN(rh_pRH);
+        DPRINT("\r\n");
+
+        spin(500000);
     }
 
     return 0;
