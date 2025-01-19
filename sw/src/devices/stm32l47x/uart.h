@@ -76,4 +76,6 @@ void uart_write_buf(UART_Regs *uart, char *buf, size_t len);
 
 void uart_write_number(UART_Regs *uart, uint32_t val, uint8_t radix);
 
+void uart_write_number_signed(UART_Regs *uart, int32_t val, uint8_t radix);
+
 #endif

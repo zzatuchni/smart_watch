@@ -6,6 +6,7 @@
 #define DPRINT(x) uart_write_buf(USART2, (x), sizeof((x)));
 #define DPRINTLN(x) { uart_write_buf(USART2, (x), sizeof((x))); uart_write_buf(USART2, "\r\n", 2); }
 #define DPRINTN(x) uart_write_number(USART2, (x), 10);
+#define DPRINTNS(x) uart_write_number_signed(USART2, (x), 10);
 #define DPRINTBUF(x,sz) uart_write_buf(USART2, (x), (sz));
 #define DPRINTB(x) uart_write_number(USART2, (x), 2);
 #define DPRINTH(x) uart_write_number(USART2, (x), 8);

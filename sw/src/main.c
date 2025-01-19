@@ -7,6 +7,8 @@
 
 #include "devices/sht41/sht41.h"
 
+#include "devices/lis2mdl/lis2mdl.h"
+
 #include "devices/misc/misc.h"
 
 #include "images/test_font.h"
@@ -20,7 +22,6 @@
 
 char date_buf[6] = {'1','2','3','4','5','6'};
 char date_buf_prev[6] = {'1','2','3','4','5','6'};
-char temp_hum_buf[6] = {0};
 
 const uint8_t *character_bitmap_bufs[10] = 
     {character_0, character_1, character_2, character_3, character_4, character_5, character_6, character_7, character_8, character_9};
@@ -88,7 +89,12 @@ int main(void) {
     res = i2c_init(&common_i2c_config);
     if (res) { DPRINT("I2C INIT ERR "); DPRINTN(res); for (;;) {} };
 
-    RTC_Time time;    
+    res = lis2mdl_init(&common_i2c_config);
+    if (res) { DPRINT("LIS2 INIT ERR "); DPRINTN(res); for (;;) {} };
+
+    RTC_Time time;
+    Temp_Humidity_Data th_data;
+    Magnetometer_Data mgmtr_data;
 
     // draw the backround
     res = gc9a01_draw_colors_from_bitmask(checkerboard, 29, GC9A01A_BLUE2, GC9A01A_BLUE3, &bg_frame, 16);
@@ -125,28 +131,26 @@ int main(void) {
             if (res) { DPRINT("RTC SET TIME ERR "); DPRINTN(res); for (;;) {} };
         }
 
-        res = sht41_get_temp_hum_data(&temp_hum_buf, SHT41_HI_PREC);
+        res = sht41_get_temp_hum_data(&th_data, SHT41_HI_PREC);
         if (res) { DPRINT("GET TEMP ERR "); DPRINTN(res); for (;;) {} };
 
-        for (size_t i = 0; i < 6; i++) {
-            DPRINTH(temp_hum_buf[i]);
-        }
-        DPRINT("\r\n");
-
-        uint32_t t_ticks = temp_hum_buf[0] * 256 + temp_hum_buf[1];
-        uint32_t rh_ticks = temp_hum_buf[3] * 256 + temp_hum_buf[4];
-        uint32_t t_degC = -45 + 175 * t_ticks/65535;
-        uint32_t rh_pRH = -6 + 125 * rh_ticks/65535;
-        if (rh_pRH > 100)
-            rh_pRH = 100;
-        if (rh_pRH < 0)
-            rh_pRH = 0;
+        res = lis2mdl_get_data(&mgmtr_data);
+        if (res) { DPRINT("GET MGMT ERR "); DPRINTN(res); for (;;) {} };
 
         DPRINT("TEMP ");
-        DPRINTN(t_degC);
+        DPRINTN(th_data.t_degC);
         DPRINT("\r\n");
         DPRINT("HUM ");
-        DPRINTN(rh_pRH);
+        DPRINTN(th_data.rh_pRH);
+        DPRINT("\r\n");
+        DPRINT("X ");
+        DPRINTNS((int32_t)mgmtr_data.x);
+        DPRINT("\r\n");
+        DPRINT("Y ");
+        DPRINTNS((int32_t)mgmtr_data.y);
+        DPRINT("\r\n");
+        DPRINT("Z ");
+        DPRINTNS((int32_t)mgmtr_data.z);
         DPRINT("\r\n");
 
         spin(500000);

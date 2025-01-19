@@ -6,6 +6,8 @@
 #include "../stm32l47x/gpio.h"
 #include "../stm32l47x/i2c.h"
 
+#include "../../debug.h"
+
 #define SHT41_I2C_ADDRESS 0x44
 #define SHT41_GET_TEMP_HUM_HI_PREC_CMD 0xFD
 #define SHT41_GET_TEMP_HUM_MED_PREC_CMD 0xF6
@@ -16,9 +18,10 @@ typedef enum {
 } SHT41_Precision;
 
 typedef struct {
-    
+    int16_t t_degC;
+    int16_t rh_pRH;
 } Temp_Humidity_Data;
 
-Result sht41_get_temp_hum_data(char *buf, SHT41_Precision prec);
+Result sht41_get_temp_hum_data(Temp_Humidity_Data *th_data, SHT41_Precision prec);
 
 #endif

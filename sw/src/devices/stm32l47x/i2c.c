@@ -8,7 +8,6 @@ const I2C_Config common_i2c_config = {
 
 // Only doing master mode right now
 Result i2c_init(const I2C_Config *config) {
-
     uint8_t af_num = I2C_AF_NUMBER;
 
     switch ((uint32_t)config->i2c) {
@@ -53,8 +52,12 @@ Result wait_for_nack_clear(I2C_Regs *i2c) {
 }
 
 Result i2c_write_buf(I2C_Regs *i2c, I2C_Address addr, char *buf, size_t len) {
-    DPRINT("WRITE\r\n");
-    
+    //DPRINTLN("WRITE");
+    //DPRINTB(i2c->CR2);
+    //DPRINTNL();
+    //DPRINTB(i2c->ISR);
+    //DPRINTNL();
+
     //reset CR2
     i2c->CR2 = 0x0;
 
@@ -70,11 +73,23 @@ Result i2c_write_buf(I2C_Regs *i2c, I2C_Address addr, char *buf, size_t len) {
     // auto end
     i2c->CR2 |= BIT(25);
 
+    //DPRINTLN("START");
+    //DPRINTB(i2c->CR2);
+    //DPRINTNL();
+    //DPRINTB(i2c->ISR);
+    //DPRINTNL();
+
     // enable START bit
     i2c->CR2 |= BIT(13);
 
     // begin transfer
     while(len-- > 0) {
+        //DPRINTLN("BYTE");
+        //DPRINTB(i2c->CR2);
+        //DPRINTNL();
+        //DPRINTB(i2c->ISR);
+        //DPRINTNL();
+
         // if nackf received, return error
         if (wait_for_nack_clear(i2c)) {
             // set nackcf
@@ -89,7 +104,11 @@ Result i2c_write_buf(I2C_Regs *i2c, I2C_Address addr, char *buf, size_t len) {
         i2c->TXDR = *(uint8_t *) buf++;
     }
 
-    DPRINT("DONEW\r\n");
+    //DPRINTLN("DONE");
+    //DPRINTB(i2c->CR2);
+    //DPRINTNL();
+    //DPRINTB(i2c->ISR);
+    //DPRINTNL();
 
     // check tc bit
     WAIT_FOR_CONDITION(i2c->ISR & (BIT(5)), GENERIC_TIMEOUT_NUM);
@@ -99,8 +118,12 @@ Result i2c_write_buf(I2C_Regs *i2c, I2C_Address addr, char *buf, size_t len) {
 }
 
 Result i2c_read_buf(I2C_Regs *i2c, I2C_Address addr, char *buf, size_t len) {
-    DPRINT("READ\r\n");
-    
+    //DPRINTLN("READ");
+    //DPRINTB(i2c->CR2);
+    //DPRINTNL();
+    //DPRINTB(i2c->ISR);
+    //DPRINTNL();
+
     //reset CR2
     i2c->CR2 = 0x0;
 
@@ -116,11 +139,23 @@ Result i2c_read_buf(I2C_Regs *i2c, I2C_Address addr, char *buf, size_t len) {
     // auto end
     i2c->CR2 |= BIT(25);
 
+    //DPRINTLN("START");
+    //DPRINTB(i2c->CR2);
+    //DPRINTNL();
+    //DPRINTB(i2c->ISR);
+    //DPRINTNL();
+
     // enable START bit
     i2c->CR2 |= BIT(13);
 
     // begin transfer
     for (size_t i = 0; i < len; i++) {
+        //DPRINTLN("BYTE");
+        //DPRINTB(i2c->CR2);
+        //DPRINTNL();
+        //DPRINTB(i2c->ISR);
+        //DPRINTNL();
+
         if (wait_for_nack_clear(i2c)) {
             // set nackcf
             i2c->ICR |= BIT(4);
@@ -134,7 +169,11 @@ Result i2c_read_buf(I2C_Regs *i2c, I2C_Address addr, char *buf, size_t len) {
         buf[i] = i2c->RXDR;
     }
 
-    DPRINT("DONER\r\n");
+    //DPRINTLN("DONE");
+    //DPRINTB(i2c->CR2);
+    //DPRINTNL();
+    //DPRINTB(i2c->ISR);
+    //DPRINTNL();
 
     // check tc bit
     WAIT_FOR_CONDITION(i2c->ISR & (BIT(5)), GENERIC_TIMEOUT_NUM);

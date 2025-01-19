@@ -122,3 +122,30 @@ void uart_write_number(UART_Regs *uart, uint32_t x, uint8_t radix) {
         }
     }
 }
+
+void uart_write_number_signed(UART_Regs *uart, int32_t x, uint8_t radix) {
+    if (x < 0) {
+        uart_write_byte(uart, '-');
+        x = x * -1;
+    }
+
+    bool leading_zero = true;
+    if (radix == 8) uart_write_buf(uart, "0x", 2);
+    else if (radix == 2) uart_write_buf(uart, "0b", 2);
+    for (size_t i = 32; i > 0; i--) {
+        uint32_t rem = x % radix;
+        x /= radix;
+        if (rem < 10) {
+            temp_number_buffer[i-1] = '0' + rem;
+        }
+        else {
+            temp_number_buffer[i-1] = 'a' + (rem - 10);
+        }
+    }
+    for (size_t i = 0; i < 32; i++) {
+        if (temp_number_buffer[i] != '0' || !leading_zero || (i == 31)) {
+            if (leading_zero) leading_zero = false;
+            uart_write_byte(uart, temp_number_buffer[i]);
+        }
+    }
+}
