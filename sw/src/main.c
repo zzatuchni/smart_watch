@@ -94,7 +94,7 @@ int main(void) {
 
     RTC_Time time;
     Temp_Humidity_Data th_data;
-    Magnetometer_Data mgmtr_data;
+    Magnetometer_Raw_Data mgmtr_data;
 
     // draw the backround
     res = gc9a01_draw_colors_from_bitmask(checkerboard, 29, GC9A01A_BLUE2, GC9A01A_BLUE3, &bg_frame, 16);
@@ -134,7 +134,7 @@ int main(void) {
         res = sht41_get_temp_hum_data(&th_data, SHT41_HI_PREC);
         if (res) { DPRINT("GET TEMP ERR "); DPRINTN(res); for (;;) {} };
 
-        res = lis2mdl_get_data(&mgmtr_data);
+        res = lis2mdl_get_raw_data(&mgmtr_data);
         if (res) { DPRINT("GET MGMT ERR "); DPRINTN(res); for (;;) {} };
 
         DPRINT("TEMP ");
@@ -150,6 +150,11 @@ int main(void) {
         DPRINTNS((int32_t)mgmtr_data.y);
         DPRINT("\r\n");
         DPRINT("Z ");
+        DPRINTNS((int32_t)mgmtr_data.z);
+        DPRINT("\r\n");
+
+        int16_t deg = lis2mdl_get_heading_degrees(mgmtr_data.y, mgmtr_data.x);
+        DPRINT("DEG ");
         DPRINTNS((int32_t)mgmtr_data.z);
         DPRINT("\r\n");
 
