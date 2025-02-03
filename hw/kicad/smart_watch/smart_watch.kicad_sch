@@ -12742,7 +12742,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "smart_watch:nPM1300"
 			(at 142.24 39.37 0)
 			(effects
 				(font
