@@ -3217,20 +3217,22 @@
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "U"
-				(at -8.89 11.43 0)
+			(property "Reference" "U4"
+				(at -10.16 11.684 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left)
 				)
 			)
 			(property "Value" "LIS2MDL"
-				(at 7.62 11.43 0)
+				(at 2.54 -11.938 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left)
 				)
 			)
 			(property "Footprint" "Package_LGA:LGA-12_2x2mm_P0.5mm"
@@ -3436,7 +3438,7 @@
 						)
 					)
 				)
-				(pin power_in line
+				(pin power_out line
 					(at 0 -12.7 90)
 					(length 2.54)
 					(name "GND"
@@ -5239,7 +5241,7 @@
 					)
 				)
 			)
-			(property "Footprint" ""
+			(property "Footprint" "smart_watch:nPM1300"
 				(at -12.7 27.94 0)
 				(effects
 					(font
@@ -5515,7 +5517,7 @@
 						)
 					)
 				)
-				(pin power_in line
+				(pin power_out line
 					(at -12.7 34.29 0)
 					(length 2.54)
 					(name "VBUS"
@@ -5939,19 +5941,13 @@
 		(uuid "2174643e-f498-4ff4-a28d-9c23ad2ba523")
 	)
 	(junction
-		(at 142.24 162.56)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "26fa371e-007f-48b1-bf70-a85c17153f66")
-	)
-	(junction
 		(at 184.15 45.72)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "2e79590c-97ab-4a12-8cba-af0df8f94673")
 	)
 	(junction
-		(at 142.24 140.97)
+		(at 142.24 128.27)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "2eff69c8-40a5-4e62-815e-f58a4e2198a4")
@@ -6089,16 +6085,22 @@
 		(uuid "a39fcceb-6275-490c-89b2-27070f712df4")
 	)
 	(junction
+		(at 142.24 185.42)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a871fca8-69e6-494b-abfe-734cdd903031")
+	)
+	(junction
+		(at 142.24 166.37)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ae6139f0-7fba-418a-9842-4a226df5ae83")
+	)
+	(junction
 		(at 113.03 175.26)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b41c31e5-6f86-4e72-ad85-efb31fb6644c")
-	)
-	(junction
-		(at 142.24 184.15)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "c2e69dcc-718a-45b2-97cd-f3918416df72")
 	)
 	(junction
 		(at 68.58 95.25)
@@ -6111,6 +6113,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c409b17c-fac5-4983-97ce-ef0f023c2945")
+	)
+	(junction
+		(at 142.24 147.32)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c5761436-b93b-4178-a878-e64f23b0e5a9")
 	)
 	(junction
 		(at 190.5 29.21)
@@ -6207,10 +6215,6 @@
 		(uuid "0435f6fe-237a-4689-a173-258c0f84dfcc")
 	)
 	(no_connect
-		(at 62.23 74.93)
-		(uuid "0ba4928c-14ae-4e5f-bcfd-f9682e6b8712")
-	)
-	(no_connect
 		(at 142.24 58.42)
 		(uuid "18cfb381-ec95-463b-96f1-423ff9893515")
 	)
@@ -6239,10 +6243,6 @@
 		(uuid "2b2fc85c-ad3a-4a3d-b275-d5753af2d8e0")
 	)
 	(no_connect
-		(at 26.67 85.09)
-		(uuid "2cd342e5-00f8-4c05-926f-c862741597ab")
-	)
-	(no_connect
 		(at 26.67 49.53)
 		(uuid "2da7cf91-6724-4038-97da-dce4cb345bef")
 	)
@@ -6253,10 +6253,6 @@
 	(no_connect
 		(at 62.23 107.95)
 		(uuid "3ea5379c-c25a-47be-9c70-3af45cd0844d")
-	)
-	(no_connect
-		(at 26.67 62.23)
-		(uuid "424bc4a7-5968-4e63-a7f4-a325ae288f55")
 	)
 	(no_connect
 		(at 62.23 82.55)
@@ -6295,6 +6291,10 @@
 		(uuid "63309ec9-d241-46b4-a8f9-60f34c98d19f")
 	)
 	(no_connect
+		(at 26.67 59.69)
+		(uuid "63c9e2ff-324f-4973-9370-87def47182e2")
+	)
+	(no_connect
 		(at 62.23 105.41)
 		(uuid "67410445-f09c-4166-8bd6-1760f7e420c6")
 	)
@@ -6321,10 +6321,6 @@
 	(no_connect
 		(at 26.67 74.93)
 		(uuid "8a18349f-9085-494d-a506-41a70b630936")
-	)
-	(no_connect
-		(at 26.67 77.47)
-		(uuid "8daff489-91a3-4abe-885c-4c2512ce52e7")
 	)
 	(no_connect
 		(at 62.23 77.47)
@@ -6359,6 +6355,10 @@
 		(uuid "ae4670de-bc63-48cc-8c84-892f280809b8")
 	)
 	(no_connect
+		(at 26.67 57.15)
+		(uuid "b85abc92-f04b-4e80-9187-c5ad24b5e9fe")
+	)
+	(no_connect
 		(at 142.24 35.56)
 		(uuid "c2f31368-3f7e-42f3-b13e-a029c0131a36")
 	)
@@ -6389,6 +6389,10 @@
 	(no_connect
 		(at 26.67 72.39)
 		(uuid "e6de8343-d8b5-47b3-b9f9-2f070b238541")
+	)
+	(no_connect
+		(at 26.67 62.23)
+		(uuid "e8cdff3e-56d4-46ae-92eb-bc939c6be4be")
 	)
 	(no_connect
 		(at 26.67 44.45)
@@ -6426,13 +6430,23 @@
 	)
 	(wire
 		(pts
-			(xy 123.19 160.02) (xy 123.19 162.56)
+			(xy 123.19 165.1) (xy 123.19 166.37)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "03069fec-0502-406b-83ef-f6a140f8d8ea")
+		(uuid "010f450d-9f5d-4baf-adb5-e48f4cd0b9da")
+	)
+	(wire
+		(pts
+			(xy 123.19 146.05) (xy 123.19 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "03c33391-940a-445e-91d3-c7a4bc828628")
 	)
 	(wire
 		(pts
@@ -6576,16 +6590,6 @@
 	)
 	(wire
 		(pts
-			(xy 139.7 162.56) (xy 142.24 162.56)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0e7d74fd-4c8a-4c21-b718-823960793d5a")
-	)
-	(wire
-		(pts
 			(xy 53.34 173.99) (xy 53.34 163.83)
 		)
 		(stroke
@@ -6636,13 +6640,13 @@
 	)
 	(wire
 		(pts
-			(xy 128.27 189.23) (xy 130.81 189.23)
+			(xy 142.24 165.1) (xy 142.24 166.37)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "13feec8a-36c3-471d-a154-84203391c66c")
+		(uuid "13b5057a-626c-4b5d-a6aa-2912c7f47427")
 	)
 	(wire
 		(pts
@@ -6766,6 +6770,16 @@
 	)
 	(wire
 		(pts
+			(xy 21.59 77.47) (xy 26.67 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1e62adad-cc94-4ef8-8fa8-ab01461ad82f")
+	)
+	(wire
+		(pts
 			(xy 215.9 57.15) (xy 223.52 57.15)
 		)
 		(stroke
@@ -6836,6 +6850,16 @@
 	)
 	(wire
 		(pts
+			(xy 138.43 170.18) (xy 142.24 170.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "25afea01-491b-481b-8789-7251332ee962")
+	)
+	(wire
+		(pts
 			(xy 270.51 162.56) (xy 270.51 160.02)
 		)
 		(stroke
@@ -6883,16 +6907,6 @@
 			(type default)
 		)
 		(uuid "2ac82a78-1dd3-4f60-b1b5-91529b796c2c")
-	)
-	(wire
-		(pts
-			(xy 142.24 184.15) (xy 144.78 184.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2b46202d-f27b-4be9-b808-0b59c66bd7af")
 	)
 	(wire
 		(pts
@@ -6956,16 +6970,6 @@
 	)
 	(wire
 		(pts
-			(xy 21.59 57.15) (xy 26.67 57.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "385df57d-3559-4792-b351-010059e8eac9")
-	)
-	(wire
-		(pts
 			(xy 184.15 73.66) (xy 184.15 71.12)
 		)
 		(stroke
@@ -6973,16 +6977,6 @@
 			(type default)
 		)
 		(uuid "397dbfd0-40ea-42f6-8175-ae8d1777d4a1")
-	)
-	(wire
-		(pts
-			(xy 142.24 189.23) (xy 142.24 184.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "39a605fe-3caa-49b7-88f8-c579d6ed49ee")
 	)
 	(wire
 		(pts
@@ -7016,7 +7010,7 @@
 	)
 	(wire
 		(pts
-			(xy 123.19 140.97) (xy 129.54 140.97)
+			(xy 123.19 128.27) (xy 129.54 128.27)
 		)
 		(stroke
 			(width 0)
@@ -7066,7 +7060,7 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 146.05) (xy 142.24 146.05)
+			(xy 138.43 132.08) (xy 142.24 132.08)
 		)
 		(stroke
 			(width 0)
@@ -7326,16 +7320,6 @@
 	)
 	(wire
 		(pts
-			(xy 142.24 167.64) (xy 142.24 162.56)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "59e6dfe9-050c-4b85-8343-761222debcb9")
-	)
-	(wire
-		(pts
 			(xy 175.26 35.56) (xy 175.26 29.21)
 		)
 		(stroke
@@ -7356,13 +7340,23 @@
 	)
 	(wire
 		(pts
-			(xy 142.24 162.56) (xy 144.78 162.56)
+			(xy 138.43 189.23) (xy 142.24 189.23)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "5c852787-3eac-4248-beba-238c396739eb")
+		(uuid "5d4bdefc-9d75-40a8-ac59-4ac4d7051d9c")
+	)
+	(wire
+		(pts
+			(xy 142.24 184.15) (xy 142.24 185.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6433938c-f7d9-4d65-ae08-336a74e1ca6d")
 	)
 	(wire
 		(pts
@@ -7536,16 +7530,6 @@
 	)
 	(wire
 		(pts
-			(xy 123.19 181.61) (xy 123.19 184.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "77793103-6c6d-4164-8d6e-1605550815da")
-	)
-	(wire
-		(pts
 			(xy 93.98 157.48) (xy 93.98 160.02)
 		)
 		(stroke
@@ -7626,7 +7610,7 @@
 	)
 	(wire
 		(pts
-			(xy 123.19 138.43) (xy 123.19 140.97)
+			(xy 123.19 127) (xy 123.19 128.27)
 		)
 		(stroke
 			(width 0)
@@ -7666,6 +7650,26 @@
 	)
 	(wire
 		(pts
+			(xy 142.24 166.37) (xy 144.78 166.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "819a9db9-384b-450f-a59d-7aaa7959741f")
+	)
+	(wire
+		(pts
+			(xy 142.24 170.18) (xy 142.24 166.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "825652a1-ab44-43ee-917f-d2e7cb4ef1dc")
+	)
+	(wire
+		(pts
 			(xy 46.99 170.18) (xy 46.99 163.83)
 		)
 		(stroke
@@ -7696,23 +7700,13 @@
 	)
 	(wire
 		(pts
-			(xy 123.19 184.15) (xy 129.54 184.15)
+			(xy 123.19 185.42) (xy 129.54 185.42)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "867d6b0f-1749-4b15-83eb-3141633c7024")
-	)
-	(wire
-		(pts
-			(xy 21.59 59.69) (xy 26.67 59.69)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8ae5144a-98c6-41f1-8ed5-2f7adc435801")
+		(uuid "8b680dc5-e199-4845-9b0f-82ab817b7639")
 	)
 	(wire
 		(pts
@@ -7766,13 +7760,13 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 167.64) (xy 142.24 167.64)
+			(xy 139.7 147.32) (xy 142.24 147.32)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "940b5d9c-bc58-4798-854b-be4411c2f24d")
+		(uuid "920f108a-bdd3-4bf5-a94f-e95e9d3a3eb9")
 	)
 	(wire
 		(pts
@@ -7796,7 +7790,7 @@
 	)
 	(wire
 		(pts
-			(xy 142.24 146.05) (xy 142.24 140.97)
+			(xy 142.24 132.08) (xy 142.24 128.27)
 		)
 		(stroke
 			(width 0)
@@ -7806,7 +7800,7 @@
 	)
 	(wire
 		(pts
-			(xy 128.27 146.05) (xy 130.81 146.05)
+			(xy 128.27 132.08) (xy 130.81 132.08)
 		)
 		(stroke
 			(width 0)
@@ -7823,6 +7817,16 @@
 			(type default)
 		)
 		(uuid "95b70e85-1f47-4585-af0d-d68cec21d6dc")
+	)
+	(wire
+		(pts
+			(xy 128.27 189.23) (xy 130.81 189.23)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "966c3708-b463-49b3-afb1-030745d70ac9")
 	)
 	(wire
 		(pts
@@ -7843,6 +7847,16 @@
 			(type default)
 		)
 		(uuid "982bf32b-cf4d-4f14-8777-86484693d92e")
+	)
+	(wire
+		(pts
+			(xy 62.23 74.93) (xy 66.04 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9a09f086-f275-4d42-8413-647743f3a52a")
 	)
 	(wire
 		(pts
@@ -7876,6 +7890,16 @@
 	)
 	(wire
 		(pts
+			(xy 142.24 185.42) (xy 144.78 185.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a00a6689-d3f9-4261-ac86-e4dbbceea957")
+	)
+	(wire
+		(pts
 			(xy 138.43 25.4) (xy 138.43 33.02)
 		)
 		(stroke
@@ -7893,6 +7917,16 @@
 			(type default)
 		)
 		(uuid "a319588a-6373-47ab-8399-011804eb3ca4")
+	)
+	(wire
+		(pts
+			(xy 123.19 147.32) (xy 129.54 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a35350cf-fa52-4c98-a997-d144882c1788")
 	)
 	(wire
 		(pts
@@ -7966,6 +8000,16 @@
 	)
 	(wire
 		(pts
+			(xy 142.24 146.05) (xy 142.24 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "af699d27-0640-4b99-9e94-652c1c56a88c")
+	)
+	(wire
+		(pts
 			(xy 238.76 139.7) (xy 247.65 139.7)
 		)
 		(stroke
@@ -7996,6 +8040,16 @@
 	)
 	(wire
 		(pts
+			(xy 142.24 147.32) (xy 144.78 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b23f10c7-55a9-48cb-9fda-e8cf796a7838")
+	)
+	(wire
+		(pts
 			(xy 167.64 81.28) (xy 171.45 81.28)
 		)
 		(stroke
@@ -8013,6 +8067,16 @@
 			(type default)
 		)
 		(uuid "b31d0008-8df1-465f-b345-4cb78aa1873a")
+	)
+	(wire
+		(pts
+			(xy 138.43 151.13) (xy 142.24 151.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b329583c-c300-44a1-a725-58d4d2c2baf7")
 	)
 	(wire
 		(pts
@@ -8106,6 +8170,16 @@
 	)
 	(wire
 		(pts
+			(xy 128.27 170.18) (xy 130.81 170.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ba4f8697-61aa-4b9d-988c-1412d322059d")
+	)
+	(wire
+		(pts
 			(xy 62.23 95.25) (xy 68.58 95.25)
 		)
 		(stroke
@@ -8146,7 +8220,17 @@
 	)
 	(wire
 		(pts
-			(xy 139.7 140.97) (xy 142.24 140.97)
+			(xy 142.24 189.23) (xy 142.24 185.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bdb39348-8411-402b-857b-4b6d3756c81b")
+	)
+	(wire
+		(pts
+			(xy 139.7 128.27) (xy 142.24 128.27)
 		)
 		(stroke
 			(width 0)
@@ -8163,6 +8247,16 @@
 			(type default)
 		)
 		(uuid "bf667fc4-5a1f-44ea-a31c-a7609b37fffe")
+	)
+	(wire
+		(pts
+			(xy 123.19 166.37) (xy 129.54 166.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c0066181-6622-4b4d-8fa2-63ae5c4adb65")
 	)
 	(wire
 		(pts
@@ -8236,6 +8330,16 @@
 	)
 	(wire
 		(pts
+			(xy 123.19 184.15) (xy 123.19 185.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8e5da5c-c454-4e06-91ce-8b1798f4ec11")
+	)
+	(wire
+		(pts
 			(xy 257.81 156.21) (xy 257.81 157.48)
 		)
 		(stroke
@@ -8296,16 +8400,6 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 189.23) (xy 142.24 189.23)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d15b3d86-6cbf-4468-b4b3-63b9a62ea8fe")
-	)
-	(wire
-		(pts
 			(xy 62.23 52.07) (xy 66.04 52.07)
 		)
 		(stroke
@@ -8336,13 +8430,13 @@
 	)
 	(wire
 		(pts
-			(xy 128.27 167.64) (xy 130.81 167.64)
+			(xy 128.27 151.13) (xy 130.81 151.13)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "d40d52e5-7e2b-4f76-8cfd-6ef76d34cbc7")
+		(uuid "d4381434-1300-4f9c-a159-bff271de3049")
 	)
 	(wire
 		(pts
@@ -8356,7 +8450,7 @@
 	)
 	(wire
 		(pts
-			(xy 142.24 140.97) (xy 144.78 140.97)
+			(xy 142.24 128.27) (xy 144.78 128.27)
 		)
 		(stroke
 			(width 0)
@@ -8406,6 +8500,16 @@
 	)
 	(wire
 		(pts
+			(xy 21.59 85.09) (xy 26.67 85.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dcd6ac62-4fdd-4cfc-9be6-87d5f4926aeb")
+	)
+	(wire
+		(pts
 			(xy 215.9 80.01) (xy 234.95 80.01)
 		)
 		(stroke
@@ -8433,6 +8537,26 @@
 			(type default)
 		)
 		(uuid "dde1c0e5-2891-40e9-b9af-929b223fee39")
+	)
+	(wire
+		(pts
+			(xy 139.7 185.42) (xy 142.24 185.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "de42154b-76a6-4ddc-b66f-1eddf3e63940")
+	)
+	(wire
+		(pts
+			(xy 142.24 127) (xy 142.24 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e03bcde8-5f5b-41ca-ba77-faf8bc816856")
 	)
 	(wire
 		(pts
@@ -8473,16 +8597,6 @@
 			(type default)
 		)
 		(uuid "e1d9cf66-b0f2-44d0-9d0f-0ed3e61337ff")
-	)
-	(wire
-		(pts
-			(xy 123.19 162.56) (xy 129.54 162.56)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e323e5db-e4f5-4d33-b6c0-23922162b966")
 	)
 	(wire
 		(pts
@@ -8533,16 +8647,6 @@
 			(type default)
 		)
 		(uuid "e82b3752-529e-426f-9d66-a8426c168fa4")
-	)
-	(wire
-		(pts
-			(xy 139.7 184.15) (xy 142.24 184.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e8c52e7a-6537-4786-95a2-d7aeaf4ecee5")
 	)
 	(wire
 		(pts
@@ -8636,6 +8740,16 @@
 	)
 	(wire
 		(pts
+			(xy 142.24 151.13) (xy 142.24 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fac69db3-500d-4d46-b864-038b0b0fca21")
+	)
+	(wire
+		(pts
 			(xy 195.58 128.27) (xy 195.58 133.35)
 		)
 		(stroke
@@ -8674,6 +8788,16 @@
 		)
 		(uuid "fe724723-c499-41ad-a165-a223ab1703dc")
 	)
+	(wire
+		(pts
+			(xy 139.7 166.37) (xy 142.24 166.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ffd0e7b4-8e7f-4906-ab2c-38eaad765be0")
+	)
 	(rectangle
 		(start 208.28 48.26)
 		(end 264.16 86.36)
@@ -8699,7 +8823,7 @@
 		(uuid 65dc5378-f8f6-45a7-b317-7e8545f23520)
 	)
 	(rectangle
-		(start 119.38 129.54)
+		(start 119.38 116.84)
 		(end 152.4 195.58)
 		(stroke
 			(width 0)
@@ -8844,7 +8968,7 @@
 	)
 	(text "Buttons"
 		(exclude_from_sim no)
-		(at 122.936 127.762 0)
+		(at 122.682 115.57 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8905,7 +9029,7 @@
 		(uuid "02a12b46-a927-4e40-8d81-d10848e6b1bc")
 	)
 	(label "BTN_3"
-		(at 21.59 59.69 180)
+		(at 21.59 77.47 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8960,7 +9084,7 @@
 		(uuid "21689d67-3e3f-45c1-bbc0-f3f10a9372fd")
 	)
 	(label "BTN_1"
-		(at 144.78 140.97 0)
+		(at 144.78 128.27 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9003,6 +9127,17 @@
 		)
 		(uuid "3724196d-3ff3-4684-bf48-764cb639784b")
 	)
+	(label "BTN_2"
+		(at 66.04 74.93 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3d451d89-e662-48e2-b5fa-5615bf484f70")
+	)
 	(label "SPI_DC"
 		(at 229.87 74.93 180)
 		(fields_autoplaced yes)
@@ -9024,6 +9159,17 @@
 			(justify right bottom)
 		)
 		(uuid "405c8395-c110-426a-b850-4fd98fe162bd")
+	)
+	(label "BTN_3"
+		(at 144.78 166.37 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "48cad375-dfbe-4c50-ae9e-38e7b2bc8aa8")
 	)
 	(label "NRST"
 		(at 139.7 83.82 180)
@@ -9124,17 +9270,6 @@
 		)
 		(uuid "721d5653-c551-48a4-99e6-def0081b517e")
 	)
-	(label "BTN_3"
-		(at 144.78 184.15 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "864dc55e-c449-4dcf-b438-a92ff94f9d8e")
-	)
 	(label "VBUS"
 		(at 195.58 128.27 0)
 		(fields_autoplaced yes)
@@ -9156,6 +9291,17 @@
 			(justify left bottom)
 		)
 		(uuid "8970bd00-224c-467d-bcc8-ca23e45a17ee")
+	)
+	(label "BTN_4"
+		(at 144.78 185.42 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8d36906c-c9db-4abb-b179-c405f9326d06")
 	)
 	(label "I2C_SDA"
 		(at 139.7 91.44 180)
@@ -9190,17 +9336,6 @@
 		)
 		(uuid "97cc9712-6260-4ab3-a19a-9872ab86824d")
 	)
-	(label "BTN_2"
-		(at 21.59 57.15 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "99de0ce2-da34-49e7-87de-aadfea10b1ac")
-	)
 	(label "SWCLK"
 		(at 66.04 67.31 0)
 		(fields_autoplaced yes)
@@ -9213,7 +9348,7 @@
 		(uuid "a8a530f3-b33b-4233-a54f-5cd3a3d2175a")
 	)
 	(label "BTN_2"
-		(at 144.78 162.56 0)
+		(at 144.78 147.32 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9221,7 +9356,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "b5994ef7-d66f-4186-a92a-ea1aa4125567")
+		(uuid "bbe482aa-2543-4f0d-a28c-be89fd67d2c7")
 	)
 	(label "I2C_SCL"
 		(at 73.66 95.25 0)
@@ -9290,6 +9425,17 @@
 		)
 		(uuid "dee8850a-85ee-4d72-bf4f-a52a3b251a1a")
 	)
+	(label "BTN_4"
+		(at 21.59 85.09 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e67cf02b-a612-4825-a7ca-5d52c2801a69")
+	)
 	(label "SWCLK"
 		(at 231.14 100.33 180)
 		(fields_autoplaced yes)
@@ -9347,7 +9493,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 134.62 146.05 90)
+		(at 134.62 132.08 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9355,7 +9501,7 @@
 		(dnp no)
 		(uuid "048db661-32c3-4a1e-bfda-46aab58d2167")
 		(property "Reference" "R1"
-			(at 132.08 143.764 90)
+			(at 131.826 134.874 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9363,7 +9509,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 137.414 143.764 90)
+			(at 137.668 134.874 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9371,7 +9517,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 134.62 147.828 90)
+			(at 134.62 133.858 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9380,7 +9526,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 134.62 146.05 0)
+			(at 134.62 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9389,7 +9535,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 134.62 146.05 0)
+			(at 134.62 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9484,6 +9630,73 @@
 			(project ""
 				(path "/4ac5f003-0b17-4e2a-b0b3-686063eb2ada"
 					(reference "U3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 134.62 170.18 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "066d2784-3084-4059-a11e-8b254687b6d5")
+		(property "Reference" "R3"
+			(at 131.826 172.974 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 137.668 172.974 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 134.62 171.958 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 134.62 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 134.62 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b079d430-0410-42ac-b00e-78ed94d8ccec")
+		)
+		(pin "2"
+			(uuid "512c998c-37a9-43b6-ba1e-ae505ed1d788")
+		)
+		(instances
+			(project "smart_watch"
+				(path "/4ac5f003-0b17-4e2a-b0b3-686063eb2ada"
+					(reference "R3")
 					(unit 1)
 				)
 			)
@@ -9687,72 +9900,6 @@
 			(project "smart_watch"
 				(path "/4ac5f003-0b17-4e2a-b0b3-686063eb2ada"
 					(reference "C40")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3.3V")
-		(at 123.19 160.02 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "135764a5-1333-49f4-9dbc-16412c671471")
-		(property "Reference" "#PWR031"
-			(at 123.19 163.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3.3V"
-			(at 123.19 154.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 123.19 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 123.19 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 123.19 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "a13bf1f6-a53f-4466-b5a5-9dbbaf9ae109")
-		)
-		(instances
-			(project "smart_watch"
-				(path "/4ac5f003-0b17-4e2a-b0b3-686063eb2ada"
-					(reference "#PWR031")
 					(unit 1)
 				)
 			)
@@ -10093,74 +10240,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Switch:SW_Push")
-		(at 134.62 184.15 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "263f7239-6fd6-4040-bbda-9ed5c77fe3a0")
-		(property "Reference" "SW2"
-			(at 134.62 176.53 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "SW_Push"
-			(at 134.62 179.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Button_Switch_SMD:SW_SPST_TL3305A"
-			(at 134.62 179.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 134.62 179.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Push button switch, generic, two pins"
-			(at 134.62 184.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "43d99a18-3a0a-4201-afd8-46d8f3a451f5")
-		)
-		(pin "1"
-			(uuid "fa81c387-05f9-448e-a364-0c09880ded00")
-		)
-		(instances
-			(project "smart_watch"
-				(path "/4ac5f003-0b17-4e2a-b0b3-686063eb2ada"
-					(reference "SW2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
 		(at 68.58 90.17 0)
 		(unit 1)
@@ -10301,32 +10380,33 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 134.62 167.64 90)
+		(lib_id "Switch:SW_Push")
+		(at 134.62 147.32 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "2c455041-5f1d-497d-aa2b-1ec23937d71f")
-		(property "Reference" "R2"
-			(at 132.08 165.354 90)
+		(fields_autoplaced yes)
+		(uuid "35f47d25-31a0-4e5f-a506-196899be5052")
+		(property "Reference" "SW2"
+			(at 134.62 139.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "10k"
-			(at 137.414 165.354 90)
+		(property "Value" "SW_Push"
+			(at 134.62 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 134.62 169.418 90)
+		(property "Footprint" "smart_watch:TL6340"
+			(at 134.62 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10335,7 +10415,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 134.62 167.64 0)
+			(at 134.62 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10343,25 +10423,25 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor"
-			(at 134.62 167.64 0)
+		(property "Description" "Push button switch, generic, two pins"
+			(at 134.62 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
 			)
-		)
-		(pin "1"
-			(uuid "66c64127-ccd4-4481-aa05-c21c478597b3")
 		)
 		(pin "2"
-			(uuid "df19704e-3ac5-43cf-bf04-a75f098c823c")
+			(uuid "6fbd5792-0de5-4993-8c74-9b32bf992277")
+		)
+		(pin "1"
+			(uuid "0e31b0a1-fcc5-42fd-91cd-2f9e4f221f81")
 		)
 		(instances
 			(project "smart_watch"
 				(path "/4ac5f003-0b17-4e2a-b0b3-686063eb2ada"
-					(reference "R2")
+					(reference "SW2")
 					(unit 1)
 				)
 			)
@@ -10696,6 +10776,71 @@
 			(project "smart_watch"
 				(path "/4ac5f003-0b17-4e2a-b0b3-686063eb2ada"
 					(reference "#PWR019")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 123.19 146.05 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4794fec7-42f3-4bf3-8636-03676563b2b3")
+		(property "Reference" "#PWR029"
+			(at 123.19 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 123.19 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 123.19 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 123.19 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 123.19 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "bc3a2e8e-cd4a-4a02-8556-004b5e518b57")
+		)
+		(instances
+			(project "smart_watch"
+				(path "/4ac5f003-0b17-4e2a-b0b3-686063eb2ada"
+					(reference "#PWR029")
 					(unit 1)
 				)
 			)
@@ -11217,16 +11362,15 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 123.19 138.43 0)
+		(at 123.19 127 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "638154d2-7025-4da6-bd98-19f224e6d5be")
 		(property "Reference" "#PWR033"
-			(at 123.19 142.24 0)
+			(at 123.19 130.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11235,7 +11379,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 123.19 133.35 0)
+			(at 123.19 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11243,7 +11387,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 123.19 138.43 0)
+			(at 123.19 127 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11252,7 +11396,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 123.19 138.43 0)
+			(at 123.19 127 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11261,7 +11405,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 123.19 138.43 0)
+			(at 123.19 127 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11803,6 +11947,72 @@
 	)
 	(symbol
 		(lib_id "power:GND")
+		(at 128.27 151.13 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "771f8c1c-64c8-4db9-a7c1-1fb9d6b03302")
+		(property "Reference" "#PWR030"
+			(at 128.27 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 128.27 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 128.27 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 128.27 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 128.27 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "fac4c38f-0856-4da4-ad84-dc2568bb3169")
+		)
+		(instances
+			(project "smart_watch"
+				(path "/4ac5f003-0b17-4e2a-b0b3-686063eb2ada"
+					(reference "#PWR030")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
 		(at 129.54 55.88 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -12165,74 +12375,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Switch:SW_Push")
-		(at 134.62 162.56 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "80d192f5-03d8-4863-b6e5-54c5ddfdfe9b")
-		(property "Reference" "SW1"
-			(at 134.62 154.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "SW_Push"
-			(at 134.62 157.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Button_Switch_SMD:SW_SPST_TL3305A"
-			(at 134.62 157.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 134.62 157.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Push button switch, generic, two pins"
-			(at 134.62 162.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "b94a1228-f014-4896-9a1e-0778f2159b0f")
-		)
-		(pin "1"
-			(uuid "0f33dc00-5a46-4bc1-9827-45aa52809955")
-		)
-		(instances
-			(project "smart_watch"
-				(path "/4ac5f003-0b17-4e2a-b0b3-686063eb2ada"
-					(reference "SW1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C")
 		(at 107.95 157.48 90)
 		(unit 1)
@@ -12564,6 +12706,74 @@
 			(project ""
 				(path "/4ac5f003-0b17-4e2a-b0b3-686063eb2ada"
 					(reference "#PWR08")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_Push")
+		(at 134.62 185.42 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "904a461d-f2bf-4c97-b0fe-4605ca4cee14")
+		(property "Reference" "SW4"
+			(at 134.62 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SW_Push"
+			(at 134.62 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "smart_watch:TL6340"
+			(at 134.62 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 134.62 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Push button switch, generic, two pins"
+			(at 134.62 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "6153e9b7-c4b8-49c6-a58d-e54e69a59976")
+		)
+		(pin "1"
+			(uuid "76410e48-eb76-496e-a564-8de172212b64")
+		)
+		(instances
+			(project "smart_watch"
+				(path "/4ac5f003-0b17-4e2a-b0b3-686063eb2ada"
+					(reference "SW4")
 					(unit 1)
 				)
 			)
@@ -12902,7 +13112,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 128.27 146.05 0)
+		(at 128.27 132.08 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12911,7 +13121,7 @@
 		(fields_autoplaced yes)
 		(uuid "9dfe98b5-ae89-4fcd-b085-17ec18040e8e")
 		(property "Reference" "#PWR034"
-			(at 128.27 152.4 0)
+			(at 128.27 138.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12920,7 +13130,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 128.27 151.13 0)
+			(at 128.27 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12928,7 +13138,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 128.27 146.05 0)
+			(at 128.27 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12937,7 +13147,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 128.27 146.05 0)
+			(at 128.27 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12946,7 +13156,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 128.27 146.05 0)
+			(at 128.27 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13103,17 +13313,16 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 128.27 167.64 0)
+		(lib_id "power:+3.3V")
+		(at 123.19 184.15 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "a081de6e-ee30-48a9-8d26-98f612baebe1")
-		(property "Reference" "#PWR032"
-			(at 128.27 173.99 0)
+		(uuid "a74142d4-54ff-49e9-97b6-e25616e7b27d")
+		(property "Reference" "#PWR040"
+			(at 123.19 187.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13121,8 +13330,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "GND"
-			(at 128.27 172.72 0)
+		(property "Value" "+3.3V"
+			(at 123.19 179.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13130,7 +13339,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 128.27 167.64 0)
+			(at 123.19 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13139,7 +13348,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 128.27 167.64 0)
+			(at 123.19 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13147,8 +13356,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 128.27 167.64 0)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 123.19 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13157,12 +13366,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "1526694a-cea7-4a19-8c6a-b5496c34dff0")
+			(uuid "4970657b-5cd6-4ef3-9bf5-a251640a9031")
 		)
 		(instances
 			(project "smart_watch"
 				(path "/4ac5f003-0b17-4e2a-b0b3-686063eb2ada"
-					(reference "#PWR032")
+					(reference "#PWR040")
 					(unit 1)
 				)
 			)
@@ -13229,6 +13438,74 @@
 			(project ""
 				(path "/4ac5f003-0b17-4e2a-b0b3-686063eb2ada"
 					(reference "#PWR013")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_Push")
+		(at 134.62 166.37 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b1f762e1-accf-40e9-b49d-a3fc01bd3db4")
+		(property "Reference" "SW3"
+			(at 134.62 158.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SW_Push"
+			(at 134.62 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "smart_watch:TL6340"
+			(at 134.62 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 134.62 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Push button switch, generic, two pins"
+			(at 134.62 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "36eb0df7-6d19-4494-bcbf-22eca4ee20d9")
+		)
+		(pin "1"
+			(uuid "dbd3c14b-349e-4d0c-b253-a1f82f153c18")
+		)
+		(instances
+			(project "smart_watch"
+				(path "/4ac5f003-0b17-4e2a-b0b3-686063eb2ada"
+					(reference "SW3")
 					(unit 1)
 				)
 			)
@@ -13401,16 +13678,16 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 128.27 189.23 0)
+		(at 128.27 170.18 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "bcdb00d2-eb5c-4c20-80d2-058d04d30bb8")
-		(property "Reference" "#PWR029"
-			(at 128.27 195.58 0)
+		(uuid "c1cea177-eee6-4d24-9eee-2878139c7979")
+		(property "Reference" "#PWR032"
+			(at 128.27 176.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13419,7 +13696,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 128.27 194.31 0)
+			(at 128.27 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13427,7 +13704,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 128.27 189.23 0)
+			(at 128.27 170.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13436,7 +13713,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 128.27 189.23 0)
+			(at 128.27 170.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13445,7 +13722,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 128.27 189.23 0)
+			(at 128.27 170.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13454,12 +13731,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "025297af-93bf-4268-9f59-a5d748baccd3")
+			(uuid "d03bb327-48ea-4f8b-8466-93d55a6a7886")
 		)
 		(instances
-			(project ""
+			(project "smart_watch"
 				(path "/4ac5f003-0b17-4e2a-b0b3-686063eb2ada"
-					(reference "#PWR029")
+					(reference "#PWR032")
 					(unit 1)
 				)
 			)
@@ -14646,6 +14923,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 128.27 189.23 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d7d659d3-ebb3-43e7-a92b-8e785bae69ae")
+		(property "Reference" "#PWR041"
+			(at 128.27 195.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 128.27 194.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 128.27 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 128.27 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 128.27 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3e8a9144-c6e3-4b3e-ad77-28e4e352c75f")
+		)
+		(instances
+			(project "smart_watch"
+				(path "/4ac5f003-0b17-4e2a-b0b3-686063eb2ada"
+					(reference "#PWR041")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 27.94 167.64 0)
 		(unit 1)
@@ -14715,6 +15058,73 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 134.62 151.13 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "dcbe80c6-3f1d-45ee-82b1-ee69edd50222")
+		(property "Reference" "R2"
+			(at 131.826 153.924 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 137.668 153.924 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 134.62 152.908 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 134.62 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 134.62 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1c2e4f38-0b3b-4166-87d7-350d52085569")
+		)
+		(pin "2"
+			(uuid "ff3b192e-473b-4c6d-8103-519bc960c302")
+		)
+		(instances
+			(project "smart_watch"
+				(path "/4ac5f003-0b17-4e2a-b0b3-686063eb2ada"
+					(reference "R2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 184.15 55.88 0)
 		(unit 1)
@@ -14775,72 +15185,6 @@
 			(project "smart_watch"
 				(path "/4ac5f003-0b17-4e2a-b0b3-686063eb2ada"
 					(reference "#PWR011")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3.3V")
-		(at 123.19 181.61 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "e4afffc1-f887-4343-a60e-f2fec657c228")
-		(property "Reference" "#PWR030"
-			(at 123.19 185.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3.3V"
-			(at 123.19 176.53 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 123.19 181.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 123.19 181.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 123.19 181.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "9ee266b2-0652-4411-89b0-5e36f8005130")
-		)
-		(instances
-			(project "smart_watch"
-				(path "/4ac5f003-0b17-4e2a-b0b3-686063eb2ada"
-					(reference "#PWR030")
 					(unit 1)
 				)
 			)
@@ -15186,6 +15530,73 @@
 	)
 	(symbol
 		(lib_id "Device:R")
+		(at 134.62 189.23 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "eae2f296-110b-4480-a9d8-1ed98a71a942")
+		(property "Reference" "R4"
+			(at 131.826 192.024 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 137.668 192.024 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 134.62 191.008 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 134.62 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 134.62 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1578b69a-f2ba-4aa8-8279-00c8a4663ce8")
+		)
+		(pin "2"
+			(uuid "ef7b8ed9-866d-4396-a85b-c5197dd8d4e3")
+		)
+		(instances
+			(project "smart_watch"
+				(path "/4ac5f003-0b17-4e2a-b0b3-686063eb2ada"
+					(reference "R4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
 		(at 35.56 167.64 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -15255,73 +15666,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 134.62 189.23 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "f39317bf-5209-4097-b2ae-fa28b0c1e64d")
-		(property "Reference" "R3"
-			(at 132.08 186.944 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10k"
-			(at 137.414 186.944 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 134.62 191.008 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 134.62 189.23 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 134.62 189.23 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "568e12c3-abcc-451c-94fd-8ef3e10a689d")
-		)
-		(pin "2"
-			(uuid "4cb5d104-cc44-4be3-bad9-0e4239c984de")
-		)
-		(instances
-			(project ""
-				(path "/4ac5f003-0b17-4e2a-b0b3-686063eb2ada"
-					(reference "R3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 68.58 107.95 0)
 		(unit 1)
@@ -15381,6 +15725,71 @@
 			(project "smart_watch"
 				(path "/4ac5f003-0b17-4e2a-b0b3-686063eb2ada"
 					(reference "#PWR05")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 123.19 165.1 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "fc31738b-806b-405d-a60c-d12f0ce7413f")
+		(property "Reference" "#PWR031"
+			(at 123.19 168.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 123.19 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 123.19 165.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 123.19 165.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 123.19 165.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "def5d3e4-2e84-485e-a4f5-cc950bff04de")
+		)
+		(instances
+			(project "smart_watch"
+				(path "/4ac5f003-0b17-4e2a-b0b3-686063eb2ada"
+					(reference "#PWR031")
 					(unit 1)
 				)
 			)
@@ -15457,7 +15866,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 134.62 140.97 0)
+		(at 134.62 128.27 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -15465,8 +15874,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "fd3f014e-d633-4b60-a664-da873e106640")
-		(property "Reference" "SW4"
-			(at 134.62 133.35 0)
+		(property "Reference" "SW1"
+			(at 134.62 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15474,15 +15883,15 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 134.62 135.89 0)
+			(at 134.62 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "Button_Switch_SMD:SW_SPST_TL3305A"
-			(at 134.62 135.89 0)
+		(property "Footprint" "smart_watch:TL6340"
+			(at 134.62 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15491,7 +15900,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 134.62 135.89 0)
+			(at 134.62 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15500,7 +15909,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 134.62 140.97 0)
+			(at 134.62 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15517,7 +15926,7 @@
 		(instances
 			(project ""
 				(path "/4ac5f003-0b17-4e2a-b0b3-686063eb2ada"
-					(reference "SW4")
+					(reference "SW1")
 					(unit 1)
 				)
 			)
