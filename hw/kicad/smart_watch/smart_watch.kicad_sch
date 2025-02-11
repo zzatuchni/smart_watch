@@ -6692,7 +6692,7 @@
 	)
 	(wire
 		(pts
-			(xy 229.87 147.32) (xy 238.76 147.32)
+			(xy 229.87 147.32) (xy 240.03 147.32)
 		)
 		(stroke
 			(width 0)
@@ -6819,6 +6819,16 @@
 			(type default)
 		)
 		(uuid "0df49e01-93a5-4f44-91c2-0345aa352214")
+	)
+	(wire
+		(pts
+			(xy 238.76 132.08) (xy 238.76 139.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0f60a985-0f6d-4c7b-b731-fc758c4b50e2")
 	)
 	(wire
 		(pts
@@ -7119,16 +7129,6 @@
 			(type default)
 		)
 		(uuid "25c1d6b8-5138-4a59-87a6-f5f482824b72")
-	)
-	(wire
-		(pts
-			(xy 198.12 132.08) (xy 198.12 138.43)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "25f56156-cfca-432a-a3fd-afcc362bdc68")
 	)
 	(wire
 		(pts
@@ -7452,16 +7452,6 @@
 	)
 	(wire
 		(pts
-			(xy 194.31 147.32) (xy 204.47 147.32)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "490d7110-86d6-421a-a799-a974ac5f55fb")
-	)
-	(wire
-		(pts
 			(xy 39.37 184.15) (xy 45.72 184.15)
 		)
 		(stroke
@@ -7652,6 +7642,16 @@
 	)
 	(wire
 		(pts
+			(xy 240.03 137.16) (xy 240.03 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "63e6ff0d-0806-4913-a000-29575a8174f7")
+	)
+	(wire
+		(pts
 			(xy 207.01 33.02) (xy 214.63 33.02)
 		)
 		(stroke
@@ -7689,6 +7689,16 @@
 			(type default)
 		)
 		(uuid "672790c3-d867-4b9f-822d-8f1a9879f7aa")
+	)
+	(wire
+		(pts
+			(xy 198.12 138.43) (xy 198.12 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "67823aea-083a-4349-8cbc-788bf13a31e1")
 	)
 	(wire
 		(pts
@@ -8052,6 +8062,16 @@
 	)
 	(wire
 		(pts
+			(xy 198.12 147.32) (xy 204.47 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8f2f98ac-c704-47e1-b351-4fcea875142a")
+	)
+	(wire
+		(pts
 			(xy 129.54 125.73) (xy 133.35 125.73)
 		)
 		(stroke
@@ -8132,7 +8152,7 @@
 	)
 	(wire
 		(pts
-			(xy 187.96 135.89) (xy 194.31 135.89)
+			(xy 187.96 135.89) (xy 198.12 135.89)
 		)
 		(stroke
 			(width 0)
@@ -8249,16 +8269,6 @@
 			(type default)
 		)
 		(uuid "a493345c-526a-413a-b2aa-8ec62282e33c")
-	)
-	(wire
-		(pts
-			(xy 194.31 135.89) (xy 194.31 147.32)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a4f70efb-e2a8-4c1a-9e6d-b491976064fe")
 	)
 	(wire
 		(pts
@@ -8402,16 +8412,6 @@
 	)
 	(wire
 		(pts
-			(xy 238.76 147.32) (xy 238.76 139.7)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b3b212f9-a15c-4bc0-9284-aa12d2f6e948")
-	)
-	(wire
-		(pts
 			(xy 105.41 74.93) (xy 105.41 78.74)
 		)
 		(stroke
@@ -8459,16 +8459,6 @@
 			(type default)
 		)
 		(uuid "b5c54310-e567-4083-82cd-74f1eef5186f")
-	)
-	(wire
-		(pts
-			(xy 238.76 132.08) (xy 238.76 137.16)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b974a7eb-88e7-499f-b8f7-3c0a15ced202")
 	)
 	(wire
 		(pts
@@ -8802,6 +8792,16 @@
 	)
 	(wire
 		(pts
+			(xy 198.12 132.08) (xy 198.12 135.89)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d95d3608-0dbe-4ce5-9eb4-6f5c3f9617b9")
+	)
+	(wire
+		(pts
 			(xy 158.75 177.8) (xy 161.29 177.8)
 		)
 		(stroke
@@ -9092,7 +9092,7 @@
 	)
 	(wire
 		(pts
-			(xy 238.76 137.16) (xy 247.65 137.16)
+			(xy 240.03 137.16) (xy 247.65 137.16)
 		)
 		(stroke
 			(width 0)
@@ -9330,6 +9330,16 @@
 		)
 		(uuid "1381d449-3e37-4df1-953b-20e360267676")
 	)
+	(text "NOTE: \nMolex PicoBlade \n53261"
+		(exclude_from_sim no)
+		(at 95.25 38.354 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "2f43599f-8fa1-4fd3-b0f3-e1e8be13c3d8")
+	)
 	(text "Temperature-Humidity Sensor"
 		(exclude_from_sim no)
 		(at 29.718 150.876 0)
@@ -9390,9 +9400,9 @@
 		)
 		(uuid "b7cd216c-c543-4042-bddd-0de47610aa42")
 	)
-	(text "NOTE: 8 pin FPC connector"
+	(text "NOTE: \nMolex 200528\n8 pin FPC connector"
 		(exclude_from_sim no)
-		(at 223.52 83.312 0)
+		(at 228.346 57.15 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13730,7 +13740,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Connector_FFC-FPC:Molex_200528-0080_1x08-1MP_P1.00mm_Horizontal"
+		(property "Footprint" "Connector_FFC-FPC:Hirose_FH12-15S-0.5SH_1x15-1MP_P0.50mm_Horizontal"
 			(at 224.79 69.85 0)
 			(effects
 				(font
@@ -13875,7 +13885,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "JST_PH6"
+		(property "Value" "JST_ZH6"
 			(at 227.33 102.8699 0)
 			(effects
 				(font
@@ -13884,7 +13894,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Connector_JST:JST_PH_S6B-PH-K_1x06_P2.00mm_Horizontal"
+		(property "Footprint" "Connector_JST:JST_ZH_S6B-ZR-SM4A-TF_1x06-1MP_P1.50mm_Horizontal"
 			(at 224.79 100.33 0)
 			(effects
 				(font
@@ -14460,7 +14470,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 112.7252 35.56 0)
 			(effects
 				(font
