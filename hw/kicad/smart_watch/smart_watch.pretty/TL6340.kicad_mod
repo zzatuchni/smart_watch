@@ -75,7 +75,7 @@
 			(type default)
 		)
 		(fill none)
-		(layer "Margin")
+		(layer "F.CrtYd")
 		(uuid "38dfe73e-a923-46a4-81b4-0ab8be5ca09a")
 	)
 	(fp_rect
