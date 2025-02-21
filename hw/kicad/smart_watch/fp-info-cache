@@ -1,4 +1,4 @@
-24994927261939400
+24996667477201552
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -101212,6 +101212,13 @@ Zigbee_Module_MRF24J40MD
 0
 12
 12
+smart_watch
+GC9A01_FPC_pads_P0.5mm
+
+
+0
+16
+15
 smart_watch
 TL6340
 
