@@ -2,26 +2,62 @@
 Chips:
 
 -   microcontroller         -   STM32L476RGT6U
+https://www.st.com/en/microcontrollers-microprocessors/stm32l476rg.html
 
--   temp / humidity sensor  -   sht41
+-   temp / humidity sensor  -   
+https://sensirion.com/products/catalog/SHT41
+https://sensirion.com/media/documents/33FD6951/67EB9032/HT_DS_Datasheet_SHT4x_5.pdf
 
 -   lcd driver              -   gc9a01
+https://www.winstar.com.tw/products/tft-lcd/ips-tft/round-tft.html
+https://www.digikey.com/en/products/detail/winstar-display/WF0128BTYAA4DNN0/18680218
 
 -   magnetometer            -   lis2mdl
+https://www.st.com/en/mems-and-sensors/lis2mdl.html
 
--   pmic                    -   nPM1300
+-   accelerometer           -   adxl335
+https://www.analog.com/en/products/adxl335.html
+
+(
+    -   mag + accel alternative
+    https://invensense.tdk.com/products/motion-tracking/9-axis/
+)
+
+-   real-time clock         -   DS3231MZ
+https://www.digikey.com/en/products/detail/analog-devices-inc-maxim-integrated/DS3231MZ-TRL/2754408
+https://www.analog.com/media/en/technical-documentation/data-sheets/DS3231M.pdf
+
+-   pmic                    -   nPM1300 QEAA
+https://www.digikey.com/en/product-highlight/n/nordic-semi/npm1300-power-management-ics
+https://www.nordicsemi.com/Products/nPM1300
+
+-   usb-to-uart             -   CH340E
+https://www.sparkfun.com/usb-to-serial-ic-ch340e-10-pack.html
+https://www.mpja.com/download/35227cpdata.pdf
+
+-   esd protection          -   usblc6-2sc6
+https://www.digikey.com/en/products/detail/stmicroelectronics/USBLC6-2SC6/1040559
+https://www.st.com/content/ccc/resource/technical/document/datasheet/06/1d/48/9c/6c/20/4a/b2/CD00050750.pdf/files/CD00050750.pdf/jcr:content/translations/en.CD00050750.pdf
 
 Connectors:
 
+-   SW header (20 pins 2.54 mm pitch for st-link cable, 5 for minimum SWD)
+    JST ZH7
+https://www.amazon.com/Kidisoii-Connector-Adapter-Surface-ZH1-5-SMT-R/dp/B0CXMYXS2L?th=1
+https://www.digikey.com/en/product-highlight/j/jst/xh-series-connectors
 
-Resistors:
+-   Battery connector       -   molex 532610271
+https://www.digikey.com/en/products/detail/molex/0532610271/699094
+
+-   USB micro B             -   1051330001
+https://www.digikey.com/en/products/detail/molex/1051330001/3313407   
+
+-   TFT connector           -   18 pin 0.5mm pitch ZIF fpc connector
+https://www.buydisplay.com/18-pins-0-5mm-pitch-bottom-contact-zif-connector-fpc-connector
+https://www.molex.com/en-us/part-list/0075?physical_pitchMatingInterface=0.50mm&physical.circuitsLoaded=18&physical.orientation=Right%20Angle
 
 
-Capacitors:
+Buttons:
 
-
-Misc:
-
--   N x LED
-
--   N x button
+-   4 right angle buttons   -   tl6340
+https://www.e-switch.com/product-catalog/tl6340-series-right-angle-smt-tactile-switch
