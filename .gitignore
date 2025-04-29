@@ -2,3 +2,5 @@ sw/src/out
 hw/screenshots
 .vscode/
 hw/kicad/smart_watch/smart_watch-backups
+hw/kicad/smart_watch/smartwatch_examples/
+hw/kicad/smart_watch/tutorial/
