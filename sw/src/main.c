@@ -7,6 +7,8 @@
 
 #include "devices/sht41/sht41.h"
 
+#include "devices/icm20948/icm20948.h"
+
 #include "devices/lis2mdl/lis2mdl.h"
 
 #include "devices/misc/misc.h"
@@ -23,17 +25,14 @@
 char date_buf[6] = {'1','2','3','4','5','6'};
 char date_buf_prev[6] = {'1','2','3','4','5','6'};
 
-const uint8_t *character_bitmap_bufs[10] = 
-    {character_0, character_1, character_2, character_3, character_4, character_5, character_6, character_7, character_8, character_9};
-
 const GC9A01_Frame bg_frame = {0, 0, GC9A01A_TFTWIDTH, GC9A01A_TFTHEIGHT};
-const GC9A01_Frame ht_frame = {168, 40, 48, 96};
-const GC9A01_Frame hu_frame = {120, 40, 48, 96};
-const GC9A01_Frame mt_frame = {72, 40, 48, 96};
-const GC9A01_Frame mu_frame = {24, 40, 48, 96};
+const GC9A01_Frame ht_frame = {168, 80, 48, 96};
+const GC9A01_Frame hu_frame = {120, 80, 48, 96};
+const GC9A01_Frame mt_frame = {72, 80, 48, 96};
+const GC9A01_Frame mu_frame = {24, 80, 48, 96};
 
-const GC9A01_Frame st_frame = {120, 136, 48, 96};
-const GC9A01_Frame su_frame = {72, 136, 48, 96};
+const GC9A01_Frame st_frame = {120, 180, 32, 64};
+const GC9A01_Frame su_frame = {72, 180, 32, 64};
 
 const RTC_Time test_time = {
     2024,
@@ -89,16 +88,36 @@ int main(void) {
     res = i2c_init(&common_i2c_config);
     if (res) { DPRINT("I2C INIT ERR "); DPRINTN(res); for (;;) {} };
 
-    res = lis2mdl_init(&common_i2c_config);
-    if (res) { DPRINT("LIS2 INIT ERR "); DPRINTN(res); for (;;) {} };
+    //res = lis2mdl_init(&common_i2c_config);
+    //if (res) { DPRINT("LIS2 INIT ERR "); DPRINTN(res); for (;;) {} };
 
     RTC_Time time;
     Temp_Humidity_Data th_data;
-    Magnetometer_Raw_Data mgmtr_data;
+    //Magnetometer_Raw_Data mgmtr_data;
 
     // draw the backround
     res = gc9a01_draw_colors_from_bitmask(checkerboard, 29, GC9A01A_BLUE2, GC9A01A_BLUE3, &bg_frame, 16);
 
+    for (;;) {
+
+        for (int i = 0; i < 16; i++) {
+
+            int sx = 24;
+            int sy = 48;
+            int x = (i % 4) * (sx + 4) + 60;
+            int y = (i / 4) * (sy + 4) + 20;
+            GC9A01_Color col = GC9A01A_RED;
+            if (i % 2) col = GC9A01A_WHITE;
+            GC9A01_Frame frame = { x, y, sx, sy };
+
+            gc9a01_draw_colors_from_bitmask(test_font_char_bitmap_bufs[i], 16, col, GC9A01A_BLACK, &frame, 3);
+
+        }
+
+        spin(500000);
+    }
+
+    /*    
     for (;;) {
         res = rtc_get_time(&time);
         if (res) { DPRINT("RTC GET TIME ERR "); DPRINTN(res); for (;;) {} };
@@ -108,18 +127,18 @@ int main(void) {
         int_to_str(time.second, date_buf + 4, 2, 10);
 
         if (!str_cmp(date_buf, date_buf_prev, 2)) {
-            gc9a01_draw_colors_from_bitmask(character_bitmap_bufs[date_buf[0]-48], 16, GC9A01A_WHITE, GC9A01A_BLACK, &ht_frame, 6);
-            gc9a01_draw_colors_from_bitmask(character_bitmap_bufs[date_buf[1]-48], 16, GC9A01A_RED, GC9A01A_BLACK, &hu_frame, 6);
+            gc9a01_draw_colors_from_bitmask(test_font_char_bitmap_bufs[date_buf[0]-48], 16, GC9A01A_WHITE, GC9A01A_BLACK, &ht_frame, 6);
+            gc9a01_draw_colors_from_bitmask(test_font_char_bitmap_bufs[date_buf[1]-48], 16, GC9A01A_RED, GC9A01A_BLACK, &hu_frame, 6);
         }
 
         if (!str_cmp(date_buf+2, date_buf_prev+2, 2)) {
-            gc9a01_draw_colors_from_bitmask(character_bitmap_bufs[date_buf[2]-48], 16, GC9A01A_WHITE, GC9A01A_BLACK, &mt_frame, 6);
-            gc9a01_draw_colors_from_bitmask(character_bitmap_bufs[date_buf[3]-48], 16, GC9A01A_RED, GC9A01A_BLACK, &mu_frame, 6);
+            gc9a01_draw_colors_from_bitmask(test_font_char_bitmap_bufs[date_buf[2]-48], 16, GC9A01A_WHITE, GC9A01A_BLACK, &mt_frame, 6);
+            gc9a01_draw_colors_from_bitmask(test_font_char_bitmap_bufs[date_buf[3]-48], 16, GC9A01A_RED, GC9A01A_BLACK, &mu_frame, 6);
         }
 
         if (!str_cmp(date_buf+4, date_buf_prev+4, 2)) {
-            gc9a01_draw_colors_from_bitmask(character_bitmap_bufs[date_buf[4]-48], 16, GC9A01A_WHITE, GC9A01A_BLACK, &st_frame, 6);
-            gc9a01_draw_colors_from_bitmask(character_bitmap_bufs[date_buf[5]-48], 16, GC9A01A_RED, GC9A01A_BLACK, &su_frame, 6);   
+            gc9a01_draw_colors_from_bitmask(test_font_char_bitmap_bufs[date_buf[4]-48], 16, GC9A01A_WHITE, GC9A01A_BLACK, &st_frame, 4);
+            gc9a01_draw_colors_from_bitmask(test_font_char_bitmap_bufs[date_buf[5]-48], 16, GC9A01A_RED, GC9A01A_BLACK, &su_frame, 4);   
         }
 
         str_copy(date_buf, date_buf_prev, 6);
@@ -134,8 +153,8 @@ int main(void) {
         res = sht41_get_temp_hum_data(&th_data, SHT41_HI_PREC);
         if (res) { DPRINT("GET TEMP ERR "); DPRINTN(res); for (;;) {} };
 
-        res = lis2mdl_get_raw_data(&mgmtr_data);
-        if (res) { DPRINT("GET MGMT ERR "); DPRINTN(res); for (;;) {} };
+        //res = lis2mdl_get_raw_data(&mgmtr_data);
+        //if (res) { DPRINT("GET MGMT ERR "); DPRINTN(res); for (;;) {} };
 
         DPRINT("TEMP ");
         DPRINTN(th_data.t_degC);
@@ -143,23 +162,24 @@ int main(void) {
         DPRINT("HUM ");
         DPRINTN(th_data.rh_pRH);
         DPRINT("\r\n");
-        DPRINT("X ");
-        DPRINTNS((int32_t)mgmtr_data.x);
-        DPRINT("\r\n");
-        DPRINT("Y ");
-        DPRINTNS((int32_t)mgmtr_data.y);
-        DPRINT("\r\n");
-        DPRINT("Z ");
-        DPRINTNS((int32_t)mgmtr_data.z);
-        DPRINT("\r\n");
+        //DPRINT("X ");
+        //DPRINTNS((int32_t)mgmtr_data.x);
+        //DPRINT("\r\n");
+        //DPRINT("Y ");
+        //DPRINTNS((int32_t)mgmtr_data.y);
+        //DPRINT("\r\n");
+        //DPRINT("Z ");
+        //DPRINTNS((int32_t)mgmtr_data.z);
+        //DPRINT("\r\n");
 
-        int16_t deg = lis2mdl_get_heading_degrees(mgmtr_data.y, mgmtr_data.x);
-        DPRINT("DEG ");
-        DPRINTNS((int32_t)mgmtr_data.z);
-        DPRINT("\r\n");
+        //int16_t deg = lis2mdl_get_heading_degrees(mgmtr_data.y, mgmtr_data.x);
+        //DPRINT("DEG ");
+        //DPRINTNS((int32_t)mgmtr_data.z);
+        //DPRINT("\r\n");
 
         spin(500000);
     }
+    */
 
     return 0;
 }

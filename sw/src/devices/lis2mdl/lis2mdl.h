@@ -1,10 +1,10 @@
 #ifndef LIS2MDL_H
 #define LIS2MDL_H
 
-#include "basic.h"
-#include "uart.h"
-#include "gpio.h"
-#include "i2c.h"
+#include "../stm32l47x/basic.h"
+#include "../stm32l47x/uart.h"
+#include "../stm32l47x/gpio.h"
+#include "../stm32l47x/i2c.h"
 
 #define LIS2MDL_I2C_ADDRESS 0x1E
 
