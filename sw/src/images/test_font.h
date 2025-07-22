@@ -326,7 +326,26 @@ uint8_t const test_font_char_degC[16] = {
     0b00000000,
 };
 
-const uint8_t *test_font_char_bitmap_bufs[16] = 
+uint8_t const test_font_char_slash[16] = {
+    0b00000011,
+    0b00000011,
+    0b00000011,
+    0b00000110,
+    0b00000110,
+    0b00001100,
+    0b00001100,
+    0b00011000,
+    0b00011000,
+    0b00110000,
+    0b00110000,
+    0b01100000,
+    0b01100000,
+    0b01100000,
+    0b11000000,
+    0b11000000,
+};
+
+const uint8_t *test_font_char_bitmap_bufs[17] = 
     {
         test_font_char_0, test_font_char_1, test_font_char_2, 
         test_font_char_3, test_font_char_4, test_font_char_5, 
@@ -334,7 +353,8 @@ const uint8_t *test_font_char_bitmap_bufs[16] =
         test_font_char_9, 
         test_font_char_N, test_font_char_E, test_font_char_S, test_font_char_W,
         test_font_char_colon,
-        test_font_char_degC
+        test_font_char_degC, 
+        test_font_char_slash
     };
 
 #endif
